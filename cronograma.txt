@@ -1,0 +1,6 @@
+-aplicações web
+-Engenharia de software
+-Arquitetura de Software
+-MVC
+-MEAN Stack
+	-explicar cada uma das tecnologias
