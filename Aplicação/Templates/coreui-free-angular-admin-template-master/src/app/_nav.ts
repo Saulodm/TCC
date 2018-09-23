@@ -7,7 +7,7 @@ export const navItems = [
  
   {
     name: 'Posto de Saúde',
-    url: '/base',
+    url: '/base/cards',
     icon: 'icon-location-pin',
     // children: [
     //   {

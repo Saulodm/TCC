@@ -43,6 +43,9 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { BaseService } from './services/base.service';
+import { PostoService } from './services/posto.service';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -58,7 +61,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     TabsModule.forRoot(),
     ChartsModule,
     ngxbootstrap.ModalModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+      apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
+    })
   ],
   declarations: [
     AppComponent,
@@ -70,6 +78,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   ],
   providers: [
     BsModalService,
+    BaseService,
+    PostoService,
     {
     provide: LocationStrategy,
     useClass: HashLocationStrategy

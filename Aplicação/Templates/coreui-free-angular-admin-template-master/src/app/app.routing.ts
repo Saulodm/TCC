@@ -16,20 +16,6 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '404',
-    component: P404Component,
-    data: {
-      title: 'Page 404'
-    }
-  },
-  {
-    path: '500',
-    component: P500Component,
-    data: {
-      title: 'Page 500'
-    }
-  },
-  {
     path: 'login',
     component: LoginComponent,
     data: {

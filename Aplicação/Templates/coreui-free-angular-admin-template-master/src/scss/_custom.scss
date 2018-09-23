@@ -1,1 +1,40 @@
-// Here you can add other styles
+
+.nosso-padding{
+	padding: 30px;
+}
+/* ajustes do painel de informações */
+.painel {
+    
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    
+}
+/* centraliza os combos e o botão */
+.centralizado{
+	margin: auto;
+
+}
+/* faz os ajustes do título */
+.titulo{
+	text-align: center;
+	color: black;
+}
+.pagePosto{
+	margin-left: 200px;
+	margin-right: 200px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	border: 2px solid;
+	border-color: rgb(255, 255, 255);
+    
+}
+agm-map {
+    height: 300px;
+}
+.map-size{
+	height: 400px;
+	
+}
