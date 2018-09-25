@@ -1,13 +1,13 @@
 export const navItems = [
   {
     name: 'Home',
-    url: '/Home',
+    url: '/home',
     icon: 'icon-home'
   },
  
   {
     name: 'Posto de Saúde',
-    url: '/base/cards',
+    url: '/base/postos',
     icon: 'icon-location-pin',
     // children: [
     //   {

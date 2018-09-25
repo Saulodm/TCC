@@ -74,11 +74,11 @@ export class CardsComponent {
           this.mostrarDetalhes = true;
           var novoMarker = this.marker();
           novoMarker.nomePosto = v.nome;
-          novoMarker.latitude = v.position;
-          novoMarker.longitude = v.position;
+          novoMarker.latitude = parseFloat(v.position.split(',')[0]);
+          novoMarker.longitude = parseFloat(v.position.split(',')[1]);
           this.Markers.push(novoMarker);
-          this.PositionMapLat = v.position;
-          this.PositionMapLong = v.position;
+          this.PositionMapLat = parseFloat(v.position.split(',')[0]);
+          this.PositionMapLong = parseFloat(v.position.split(',')[1]);
         }
       });
     } else {
@@ -89,13 +89,13 @@ export class CardsComponent {
       this.Postos.forEach(v => {
         var novoMarker = this.marker();
         novoMarker.nomePosto = v.nome;
-        novoMarker.latitude = v.position;
-        novoMarker.longitude = v.position;
+        novoMarker.latitude = parseFloat(v.position.split(',')[0]);
+        novoMarker.longitude = parseFloat(v.position.split(',')[1]);
         this.Markers.push(novoMarker);
       });
 
-      this.PositionMapLat = this.Markers[0].position;
-      this.PositionMapLong = this.Markers[0].position;
+      this.PositionMapLat = parseFloat(this.Markers[0].latitude);
+      this.PositionMapLong = parseFloat(this.Markers[0].longitude);
     }
   }
 }

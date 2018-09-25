@@ -18,7 +18,7 @@
 						<div>
 							<select [disabled]="regiaoSelecionada == 0" [(ngModel)]="postoSelecionado" class="form-control" [ngModelOptions]="{standalone: true}">
 								
-								<option selected="true" [ngValue]="0">Todos</option>						
+								<option selected="true" [ngValue]="1">Todos</option>						
 								<option *ngFor="let c of Postos" [ngValue]="c.cod">{{c.nome}}</option>
 							  </select>
 
@@ -43,19 +43,19 @@
 							<p>Nome: {{detalhesPosto.nome}}</p>
 						</div>
 						<div class="panel-body">
-							<p>Região: {{detalhesPosto.regiao}}</p>
-							<p>Endereço: {{detalhesPosto.endereco}}</p>
-							<p>Telefones: {{detalhesPosto.telefones}}</p>
-							<p>Horário Acolhimento: {{detalhesPosto.acolhimento}}</p>
-							<p>Horário Farmácia: {{detalhesPosto.farmacia}}</p>
+							<p><strong>Região: </strong>{{detalhesPosto.regiao}}</p>
+							<p><strong>Endereço:</strong> {{detalhesPosto.endereco}}</p>
+							<p><strong>Telefones:</strong> {{detalhesPosto.telefones}}</p>
+							<p><strong>Horário Acolhimento:</strong> {{detalhesPosto.acolhimento}}</p>
+							<p><strong>Horário Farmácia:</strong> {{detalhesPosto.farmacia}}</p>
 						</div>
 					</div>
 				</div>
-				<!-- MAPA -->			
+				<!-- MAPA -->
 				<div id="map">
-					<agm-map *ngIf "showMap" [latitude]="PositionMapLat" [longitude]="PositionMapLong" [zoom]="Zoom" [disableDefaultUI]="false"
+					<agm-map *ngIf="showMap" [latitude]="PositionMapLat" [longitude]="PositionMapLong" [zoom]="Zoom" [disableDefaultUI]="false"
 					 [zoomControl]="false">
-						<agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.latitude" [longitude]="m.latitude" [markerDraggable]="false">
+						<agm-marker *ngFor="let m of Markers" [latitude]="m.latitude" [longitude]="m.longitude" [markerDraggable]="false">
 							<agm-info-window>
 								<strong>{{m.nomePosto}}</strong>
 							</agm-info-window>

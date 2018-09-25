@@ -21,7 +21,7 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'cards',
+        path: 'postos',
         component: CardsComponent,
         data: {
           title: 'Cards'
