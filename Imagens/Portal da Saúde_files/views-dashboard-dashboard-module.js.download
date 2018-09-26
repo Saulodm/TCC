@@ -1,0 +1,153 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["views-dashboard-dashboard-module"],{
+
+/***/ "./src/app/views/dashboard/dashboard-routing.module.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/views/dashboard/dashboard-routing.module.ts ***!
+  \*************************************************************/
+/*! exports provided: DashboardRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardRoutingModule", function() { return DashboardRoutingModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _dashboard_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dashboard.component */ "./src/app/views/dashboard/dashboard.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _dashboard_component__WEBPACK_IMPORTED_MODULE_2__["DashboardComponent"],
+        data: {
+            title: 'Dashboard'
+        }
+    }
+];
+var DashboardRoutingModule = /** @class */ (function () {
+    function DashboardRoutingModule() {
+    }
+    DashboardRoutingModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild(routes)],
+            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
+        })
+    ], DashboardRoutingModule);
+    return DashboardRoutingModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/dashboard/dashboard.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/views/dashboard/dashboard.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"animated fadeIn\">\n  <div class=\"row\">\n    <div class=\"card col-md-6 mt-5 mr-0\">\n      <div class=\"card-body\">\n        <h1>Vacinação - Anote na agenda</h1>\n        <img class=\"imgNoticia\" src=\"../../../assets/vacinação.jpg\" />\n      </div>\n      <div class=\"card-footer clicavel\">\n        <div>Crianças de 2 até 5 anos serão vacinadas neste sábado 29/09. Traga seu filho!</div>\n      </div>\n    </div>\n    <div class=\"card col-md-6 mt-5\">\n      <div class=\"card-body\">\n        <h1>De olho no prato</h1>\n        <img class=\"imgNoticia\" src=\"../../../assets/alimentacaoSaudavel.jpg\" />\n      </div>\n      <div class=\"card-footer clicavel\" (click)=\"mostraAlert();\">\n        <div>Você saberia dizer se está se alimentando de forma saudável?</div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"card col-md-6 mt-3 mr-0\">\n      <div class=\"card-body\">\n        <h1>Será que é gripe?</h1>\n        <img class=\"imgNoticia\" src=\"../../../assets/gripe.jpg\" />\n      </div>\n      <div class=\"card-footer clicavel\">\n        <div>Saiba como diferenciar gripe de resfriado, e as principais formas de prevenção. </div>\n      </div>\n    </div>\n    <div class=\"card col-md-6 mt-3\">\n      <div class=\"card-body\">\n        <h1>Corpo em movimento</h1>\n        <img class=\"imgNoticia\" src=\"../../../assets/atividadeFisica.png\" />\n      </div>\n      <div class=\"card-footer clicavel\">\n        <div>O corpo humano precisa se movimentar, até mesmo na melhor idade</div>\n      </div>\n    </div>\n  </div>\n</div>\n<div bsModal #myModalVacina=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Confirmação de Email</h4>\n\n      </div>\n      <div class=\"modal-body\">\n        <label>Informe o email utilizado para cadastro</label>\n        <div class=\"input-group\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"emailConfirmacao\" placeholder=\"Email\">\n          <div class=\"input-group-append\">\n            <button class=\"btn btn-outline-secondary\" [disabled]=\"desabilitaButaoEnviar()\" (click)=\"exibirMensagem()\" type=\"button\"> Enviar</button>\n          </div>\n        </div>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"myModal.hide()\">Close</button>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n<div bsModal #myModalAlimentacao=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Confirmação de Email</h4>\n\n      </div>\n      <div class=\"modal-body\">\n        <label>Informe o email utilizado para cadastro</label>\n        <div class=\"input-group\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"emailConfirmacao\" placeholder=\"Email\">\n          <div class=\"input-group-append\">\n            <button class=\"btn btn-outline-secondary\" [disabled]=\"desabilitaButaoEnviar()\" (click)=\"exibirMensagem()\" type=\"button\"> Enviar</button>\n          </div>\n        </div>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"myModal.hide()\">Close</button>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n<div bsModal #myModalGripe=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Confirmação de Email</h4>\n\n      </div>\n      <div class=\"modal-body\">\n        <label>Informe o email utilizado para cadastro</label>\n        <div class=\"input-group\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"emailConfirmacao\" placeholder=\"Email\">\n          <div class=\"input-group-append\">\n            <button class=\"btn btn-outline-secondary\" [disabled]=\"desabilitaButaoEnviar()\" (click)=\"exibirMensagem()\" type=\"button\"> Enviar</button>\n          </div>\n        </div>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"myModal.hide()\">Close</button>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n<div bsModal #myModalAtividade=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Confirmação de Email</h4>\n\n      </div>\n      <div class=\"modal-body\">\n        <label>Informe o email utilizado para cadastro</label>\n        <div class=\"input-group\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"emailConfirmacao\" placeholder=\"Email\">\n          <div class=\"input-group-append\">\n            <button class=\"btn btn-outline-secondary\" [disabled]=\"desabilitaButaoEnviar()\" (click)=\"exibirMensagem()\" type=\"button\"> Enviar</button>\n          </div>\n        </div>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"myModal.hide()\">Close</button>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/views/dashboard/dashboard.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/views/dashboard/dashboard.component.ts ***!
+  \********************************************************/
+/*! exports provided: DashboardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardComponent", function() { return DashboardComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var DashboardComponent = /** @class */ (function () {
+    function DashboardComponent() {
+    }
+    DashboardComponent.prototype.ngOnInit = function () {
+    };
+    DashboardComponent.prototype.mostraAlert = function () {
+        alert("funciona!!!");
+    };
+    DashboardComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            template: __webpack_require__(/*! ./dashboard.component.html */ "./src/app/views/dashboard/dashboard.component.html")
+        })
+    ], DashboardComponent);
+    return DashboardComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/dashboard/dashboard.module.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/views/dashboard/dashboard.module.ts ***!
+  \*****************************************************/
+/*! exports provided: DashboardModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardModule", function() { return DashboardModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var ng2_charts_ng2_charts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ng2-charts/ng2-charts */ "./node_modules/ng2-charts/ng2-charts.js");
+/* harmony import */ var ng2_charts_ng2_charts__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(ng2_charts_ng2_charts__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "./node_modules/ngx-bootstrap/dropdown/index.js");
+/* harmony import */ var ngx_bootstrap_buttons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-bootstrap/buttons */ "./node_modules/ngx-bootstrap/buttons/index.js");
+/* harmony import */ var _dashboard_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dashboard.component */ "./src/app/views/dashboard/dashboard.component.ts");
+/* harmony import */ var _dashboard_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dashboard-routing.module */ "./src/app/views/dashboard/dashboard-routing.module.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+var DashboardModule = /** @class */ (function () {
+    function DashboardModule() {
+    }
+    DashboardModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormsModule"],
+                _dashboard_routing_module__WEBPACK_IMPORTED_MODULE_6__["DashboardRoutingModule"],
+                ng2_charts_ng2_charts__WEBPACK_IMPORTED_MODULE_2__["ChartsModule"],
+                ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_3__["BsDropdownModule"],
+                ngx_bootstrap_buttons__WEBPACK_IMPORTED_MODULE_4__["ButtonsModule"].forRoot()
+            ],
+            declarations: [_dashboard_component__WEBPACK_IMPORTED_MODULE_5__["DashboardComponent"]]
+        })
+    ], DashboardModule);
+    return DashboardModule;
+}());
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=views-dashboard-dashboard-module.js.map
