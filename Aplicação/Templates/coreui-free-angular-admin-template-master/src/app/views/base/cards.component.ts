@@ -63,7 +63,7 @@ export class CardsComponent {
   }
   //função que exibe todos os detalhes de acordo com o posto selecionado.
   verDetalhes() {
-
+    this.Markers = [];
     if (this.postoSelecionado > 1) {
       this.Zoom = 15;
       this.showMap = true;
