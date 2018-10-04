@@ -91,7 +91,7 @@ export const navItems = [
   },
   {
     name: 'Cartão de Vacina',
-    url: '/charts',
+    url: '/vacinas',
     icon: 'icon-pie-chart'
   },
   {
