@@ -44,7 +44,7 @@ export class LoginComponent {
   exibirMensagem() {
     var result = this.loginService.getUsuarioPorEmail(this.emailConfirmacao);
     if (result.length == 0) {
-      alert("Email não cadastrado!");      
+      alert("Email não cadastrado!");
     } else {
       this.usuarioBusca = result[0];
       if (this.usuarioBusca.email == this.emailConfirmacao) {
@@ -53,7 +53,7 @@ export class LoginComponent {
         alert("Email não cadastrado!");
       }
     }
-    
+
   }
   desabilitaButaoEnviar() {
     return this.emailConfirmacao == undefined
@@ -74,6 +74,9 @@ export class LoginComponent {
       }
     }
 
-    //this.router.navigate(['dashboard']);
+    //this.router.navigate(['register']);
+  }
+  registrar(){
+    this.router.navigate(['register']);
   }
 }

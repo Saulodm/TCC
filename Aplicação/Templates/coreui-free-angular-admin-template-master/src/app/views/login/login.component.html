@@ -25,7 +25,10 @@
                     <div class="col-6">
                       <button type="button" class="btn btn-primary px-4" [disabled]="desabilitaButaoLogar()" (click)="logar()">Login</button>
                     </div>
-                    <div class="col-6 text-right">
+                    <div class="col-3 text-right">
+                      <button type="button" (click)="registrar()" class="btn btn-link px-0">Registre-se</button>
+                    </div>
+                    <div class="col-3 text-right">
                       <button type="button" (click)="myModal.show()" class="btn btn-link px-0">Esqueceu sua senha?</button>
                     </div>
                   </div>

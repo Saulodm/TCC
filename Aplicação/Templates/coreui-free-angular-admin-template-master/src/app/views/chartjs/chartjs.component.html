@@ -3,25 +3,82 @@
   <div class="card">
     <div class="card-header">
       Lista de Vacinas cadastradas
-     
+
     </div>
     <div class="card-body">
-     
-        <!-- <div class="row">
-            <div class="column" *ngFor="let v of listaVacinas" style="background-color:#aaa;">
-                <h2>Nome: {{v.nome}}</h2>
-                <p>Dose {{v.doses}}</p>
-            </div>
-            <div class="column" *ngFor="let v of listaVacinas2" style="background-color:#bbb;">
-              <h2>Nome: {{v.nome}}</h2>
-              <p>Dose {{v.doses}}</p>
-            </div>
-          </div> -->
-      <ul>
-        <li *ngFor="let v of listaVacinas">
-          Nome: {{v.nome}} - Dose {{v.doses}}
-        </li>
-      </ul>
+
+      <div class="row">
+        <div class="column col-3" style="background-color:#aaa;">
+          <h5><strong>Nome:</strong> {{AntimeningococicaCConjugada.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{AntimeningococicaCConjugada.Dose}}</h5>
+          <h5><strong>Data:</strong> {{AntimeningococicaCConjugada.Data}}</h5>
+        </div>
+        <div class="column col-3" style="background-color:#bbb;">
+          <h5><strong>Nome:</strong> {{Antipneumococica10ValenteConjugada.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{Antipneumococica10ValenteConjugada.Dose}}</h5>
+          <h5><strong>Data:</strong> {{Antipneumococica10ValenteConjugada.Data}}</h5>
+        </div>
+        <div class="column col-3" style="background-color:#aaa;">
+          <h5><strong>Nome:</strong> {{BCGID.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{BCGID.Dose}}</h5>
+          <h5><strong>Data:</strong> {{BCGID.Data}}</h5>
+
+        </div>
+        <div class="column col-3" style="background-color:#bbb;">
+          <h5><strong>Nome:</strong> {{DTP.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{DTP.Dose}}</h5>
+          <h5><strong>Data:</strong> {{DTP.Data}}</h5>
+
+        </div>
+
+      </div>
+      <br/>
+      <div class="row">
+        <div class="column col-3" style="background-color:#aaa;">
+          <h5><strong>Nome:</strong> {{FebreAmarela.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{FebreAmarela.Dose}}</h5>
+          <h5><strong>Data:</strong> {{FebreAmarela.Data}}</h5>
+
+        </div>
+        <div class="column col-3" style="background-color:#bbb;">
+          <h5><strong>Nome:</strong> {{HepatitieB.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{HepatitieB.Dose}}</h5>
+          <h5><strong>Data:</strong> {{HepatitieB.Data}}</h5>
+
+        </div>
+        <div class="column col-3" style="background-color:#aaa;">
+          <h5><strong>Nome:</strong> {{SRC.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{SRC.Dose}}</h5>
+          <h5><strong>Data:</strong> {{SRC.Data}}</h5>
+
+        </div>
+        <div class="column col-3" style="background-color:#bbb;">
+          <h5><strong>Nome:</strong> {{Tetravalente.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{Tetravalente.Dose}}</h5>
+          <h5><strong>Data:</strong> {{Tetravalente.Data}}</h5>
+
+        </div>
+
+      </div>
+      <br/>
+
+      <div class="row">
+        <div class="column col-3" style="background-color:#aaa;">
+          <h5><strong>Nome:</strong> {{VOP.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{VOP.Dose}}</h5>
+          <h5><strong>Data:</strong> {{VOP.Data}}</h5>
+
+        </div>
+        <div class="column col-3" style="background-color:#bbb;">
+          <h5><strong>Nome:</strong> {{VORH.Nome}} </h5>
+          <h5><strong>Dose:</strong> {{VORH.Dose}}</h5>
+          <h5><strong>Data:</strong> {{VORH.Data}}</h5>
+
+        </div>
+
+
+      </div>
+
     </div>
   </div>
 
