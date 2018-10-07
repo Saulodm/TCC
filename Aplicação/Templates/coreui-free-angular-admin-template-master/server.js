@@ -32,10 +32,21 @@ var usuarioSchema = new Schema({
   id: Number,
   login: String,
   senha: String,
-  email: String
+  email: String,
+  nome: String,
+  sobrenome: String,
+  cpf: String,
+  celular: Number,
+  dependentes: [{
+    nome: String,
+    sobrenome: String,
+    cpf: String,
+    parentesco: String
+  }]
+
 });
 var vacinaSchema = new Schema({
-  cod:Number,
+  cod: Number,
   nome: String,
   idade: Number,
   tipoIdade: String,
@@ -97,7 +108,7 @@ app.get("/Vacinas/", function (req, res) {
 
 
 //função que cria a tabela no banco. A tabela é criada a partir de um arquivo xls. 
-app.get("/CreateBD/", function (req, res) {
+app.get("/CreatePostos/", function (req, res) {
   console.log("connected");
   var Posto = mongoose.model("Posto", postoSchema);
   var model = null;
@@ -136,7 +147,12 @@ app.get("/CreateUsers/", function (req, res) {
     id: 1,
     login: "sdm",
     senha: "x",
-    email: "sdm@sdm.com"
+    email: "sdm@sdm.com",
+    nome: "Saulo",
+    sobrenome: "Daniel Medeiros",
+    cpf: "109.683.476-65",
+    celular: "996137099",
+    dependentes: []
   });
   usuario.save(function (err) {
     if (err)
@@ -146,35 +162,35 @@ app.get("/CreateUsers/", function (req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.end(JSON.stringify("Created"));
 });
-app.get("/CreateVacinas/", function (req, res) {
-  console.log("connected");
-  var Vacina = mongoose.model("Vacina", vacinaSchema);
-  var model = null;
-  var ods = './Base de Vacinas.ods';
+// app.get("/CreateVacinas/", function (req, res) {
+//   console.log("connected");
+//   var Vacina = mongoose.model("Vacina", vacinaSchema);
+//   var model = null;
+//   var ods = './Base de Vacinas.ods';
 
-  mongoxlsx.xlsx2MongoData(ods, model, function (err, data) {
-    console.log('start');
-    console.log(data);
-    data.forEach(function (element) {
-      var vacina = new Vacina({
-        cod: element.Cod,
-        nome: element.Nome,
-        idade: element.Idade,
-        tipoIdade: element.TipoIdade,
-        doses: element.Doses       
-      });
+//   mongoxlsx.xlsx2MongoData(ods, model, function (err, data) {
+//     console.log('start');
+//     console.log(data);
+//     data.forEach(function (element) {
+//       var vacina = new Vacina({
+//         cod: element.Cod,
+//         nome: element.Nome,
+//         idade: element.Idade,
+//         tipoIdade: element.TipoIdade,
+//         doses: element.Doses
+//       });
 
-      vacina.save(function (err) {
-        if (err)
-          return handleError(err);
-        console.log("saved");
+//       vacina.save(function (err) {
+//         if (err)
+//           return handleError(err);
+//         console.log("saved");
 
-      })
-    }, this);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.end(JSON.stringify("Created"));
-  });
-});
+//       })
+//     }, this);
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.end(JSON.stringify("Created"));
+//   });
+// });
 
 
 var server = app.listen(3000, function () {
