@@ -17,7 +17,8 @@ export class UsuarioService {
     return result.length > 0;
   }
   postUsuario(usuario: UsuarioViewModel) {
-    this.baseService.httpPost("/Usuario/Register", res => {
+    var user =  JSON.stringify(usuario);
+    this.baseService.httpPost("Usuario/Register", user, res => {
       console.log(res);
     })
   }

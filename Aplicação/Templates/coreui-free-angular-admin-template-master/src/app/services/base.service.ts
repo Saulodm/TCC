@@ -15,7 +15,7 @@ export class BaseService {
         callback(xmlHttp.responseText);
     }
 
-    xmlHttp.open("GET",this.urlBase + Url, false); // true for asynchronous 
+    xmlHttp.open("GET", this.urlBase + Url, false); // true for asynchronous 
     xmlHttp.send();
   }
 
@@ -26,17 +26,19 @@ export class BaseService {
         callback(xmlHttp.responseText);
     }
 
-    xmlHttp.open("GET",this.urlBase + theUrl, true); // true for asynchronous 
+    xmlHttp.open("GET", this.urlBase + theUrl, true); // true for asynchronous 
     xmlHttp.send();
   }
 
-  httpPost(Url, callback){
+  httpPost(Url, body, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     }
-    xmlHttp.open("POST",this.urlBase + Url, false); // true for asynchronous 
-    xmlHttp.send();
+    xmlHttp.open("POST", this.urlBase + Url); // true for asynchronous 
+    xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xmlHttp.send(body);
   }
 }

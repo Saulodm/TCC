@@ -4,6 +4,9 @@ var express = require("express");
 var app = express();
 var mongoxlsx = require('mongo-xlsx');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 //url do baco de dados remoto.
 const url = "mongodb://portal_saude:tcc2portalsaude@ds111993.mlab.com:11993/tcc";
 //criando a conexão com o banco de dados.
@@ -106,18 +109,18 @@ app.get("/Vacinas/", function (req, res) {
   });
 });
 
-app.post("/Usuario/Register", function (req, error) {
-  if (error) {
-    console.log(error);
-  }
-  console.log(req.params);
+app.post("/Usuario/Register", function (req, res) {
+ 
+  console.log(req);
+  console.log(req.body);
   // var User = mongoose.model("Usuario", usuarioSchema);
   // var usuario = new User({
 
   // });
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.end();
+  res.send();
 })
+
 //função que cria a tabela no banco. A tabela é criada a partir de um arquivo xls. 
 app.get("/CreatePostos/", function (req, res) {
   console.log("connected");
