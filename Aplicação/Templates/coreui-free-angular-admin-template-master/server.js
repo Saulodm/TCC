@@ -106,7 +106,18 @@ app.get("/Vacinas/", function (req, res) {
   });
 });
 
+app.post("/Usuario/Register", function (req, error) {
+  if (error) {
+    console.log(error);
+  }
+  console.log(req.params);
+  // var User = mongoose.model("Usuario", usuarioSchema);
+  // var usuario = new User({
 
+  // });
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.end();
+})
 //função que cria a tabela no banco. A tabela é criada a partir de um arquivo xls. 
 app.get("/CreatePostos/", function (req, res) {
   console.log("connected");

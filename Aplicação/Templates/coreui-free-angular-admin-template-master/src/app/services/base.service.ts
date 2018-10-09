@@ -29,4 +29,14 @@ export class BaseService {
     xmlHttp.open("GET",this.urlBase + theUrl, true); // true for asynchronous 
     xmlHttp.send();
   }
+
+  httpPost(Url, callback){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("POST",this.urlBase + Url, false); // true for asynchronous 
+    xmlHttp.send();
+  }
 }

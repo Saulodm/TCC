@@ -1,3 +1,4 @@
+import { UsuarioService } from './services/usuario.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -76,6 +77,7 @@ import { PostoService } from './services/posto.service';
     BsModalService,
     BaseService,
     PostoService,
+    UsuarioService,
     {
     provide: LocationStrategy,
     useClass: HashLocationStrategy
