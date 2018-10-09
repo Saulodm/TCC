@@ -1,4 +1,5 @@
 import { EnderecoViewModel } from "./enderecoViewModel";
+import { DependenteViewModel } from "./dependenteViewModel";
 
 export class UsuarioViewModel {
     login: string;
@@ -8,5 +9,7 @@ export class UsuarioViewModel {
     sobrenome: string;
     cpf: string;
     celular: number;
+    perfil: number;
     endereco: EnderecoViewModel;
+    dependetes: DependenteViewModel[];
 }

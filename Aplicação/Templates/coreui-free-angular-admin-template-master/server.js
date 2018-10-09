@@ -38,6 +38,8 @@ var usuarioSchema = new Schema({
   email: String,
   nome: String,
   sobrenome: String,
+  dataNascimento: String,
+  perfil: Number,
   cpf: String,
   celular: Number,
   dependentes: [{
@@ -110,7 +112,7 @@ app.get("/Vacinas/", function (req, res) {
 });
 
 app.post("/Usuario/Register", function (req, res) {
- 
+
   console.log(req);
   console.log(req.body);
   // var User = mongoose.model("Usuario", usuarioSchema);
@@ -164,8 +166,17 @@ app.get("/CreateUsers/", function (req, res) {
     email: "sdm@sdm.com",
     nome: "Saulo",
     sobrenome: "Daniel Medeiros",
+    dataNascimento: "15-02-1994",
     cpf: "109.683.476-65",
     celular: "996137099",
+    perfil: 1,
+    endereco: {
+      rua: "Vitória",
+      numero: 146,
+      bairro: "Santa Cruz",
+      complemento: "",
+      regiao: "Nordeste",
+    },
     dependentes: []
   });
   usuario.save(function (err) {
