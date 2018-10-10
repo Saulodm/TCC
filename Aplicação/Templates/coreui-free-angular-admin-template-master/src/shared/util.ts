@@ -1,40 +1,42 @@
 export class Util {
 
     MaskCpfCnpj(num) {
+
         if (num) {
-            num = num.toString();
-            num = num.replace(/\D/g, "");
-            if (num.length > 11)
-                num = num.slice(0, 11);
+            num = num.replace(/\D/g, '');
+
+            if (num.length > 11) {
+                num = num.substring(0, 11);
+            }
+
             switch (num.length) {
                 case 4:
-                    num = num.replace(/(\d+)(\d{3})/, " $1.$2");
+                    num = num.replace(/(\d{3})(\d+)/, '$1.$2');
                     break;
                 case 5:
-                    num = num.replace(/(\d+)(\d{3})/, " $1.$2");
+                    num = num.replace(/(\d{3})(\d+)/, '$1.$2');
                     break;
                 case 6:
-                    num = num.replace(/(\d+)(\d{3})/, " $1.$2");
+                    num = num.replace(/(\d{3})(\d+)/, '$1.$2');
                     break;
                 case 7:
-                    num = num.replace(/(\d+)(\d{3})(\d{3})/, " $1.$2.$3");
+                    num = num.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
                     break;
                 case 8:
-                    num = num.replace(/(\d+)(\d{3})(\d{3})/, " $1.$2.$3");
+                    num = num.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
                     break;
                 case 9:
-                    num = num.replace(/(\d+)(\d{3})(\d{3})/, " $1.$2.$3");
+                    num = num.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
                     break;
                 case 10:
-                    num = num.replace(/(\d+)(\d{3})(\d{3})(\d{1})/, " $1.$2.$3-$4");
+                    num = num.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, '$1.$2.$3-$4');
                     break;
                 case 11:
-                    num = num.replace(/(\d+)(\d{3})(\d{3})(\d{2})/, " $1.$2.$3-$4");
+                    num = num.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, '$1.$2.$3-$4');
                     break;
-                default:
-                    num = num.replace(/(\d+)(\d{3})(\d{3})(\d{2})/, " $1.$2.$3-$4");
-                    break;
+
             }
+
         }
         return num;
     }
@@ -44,6 +46,9 @@ export class Util {
             num = num.toString();
             num = num.replace(/\D/g, "");
 
+            if (num.length > 11) {
+                num = num.substring(0, 11);
+            }
             switch (num.length) {
                 case 1:
                     num = num.replace(/(\d+)/, " ($1)");

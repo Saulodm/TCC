@@ -36,9 +36,9 @@ export class BaseService {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     }
-    xmlHttp.open("POST", this.urlBase + Url); // true for asynchronous 
+    xmlHttp.open("POST", this.urlBase + Url, false); // true for asynchronous 
     xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    // xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
     xmlHttp.send(body);
   }
 }

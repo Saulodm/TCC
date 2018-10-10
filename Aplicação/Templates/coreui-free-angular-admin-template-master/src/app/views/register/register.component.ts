@@ -55,5 +55,11 @@ export class RegisterComponent implements OnInit {
    alert("Cadastro executado!")
    this.router.navigate(['login']);
   }
+  getById(name: string) {
+    return document.getElementById(name);
+  }
+  atualizaValorInput(name: string, valor: string) {
+    (<HTMLInputElement>this.getById(name)).value = valor;
+  }
 
 }

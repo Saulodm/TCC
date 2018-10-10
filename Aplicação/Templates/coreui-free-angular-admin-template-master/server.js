@@ -32,8 +32,8 @@ var postoSchema = new Schema({
   position: String
 });
 var usuarioSchema = new Schema({
-  id: Number,
-  idendereco: Number,
+
+  idendereco: String,
   login: String,
   senha: String,
   email: String,
@@ -60,7 +60,7 @@ var vacinaSchema = new Schema({
 });
 
 var enderecoSchema = new Schema({
-  id: Number,
+
   rua: String,
   numero: Number,
   bairro: String,
@@ -125,20 +125,23 @@ app.post("/Usuario/Register", function (req, res) {
   var User = mongoose.model("Usuario", usuarioSchema);
   var Endereco = mongoose.model("Endereco", enderecoSchema);
   var body = req.body;
-  var idValidoUser = this.getNewIdValidUser();
-  var idValidoEndereco = this.getNewIdValidEndereco();
-  setTimeout(function () {
-    var endereco = new Endereco({
-      id: idValidoEndereco,
-      rua: body.endereco.rua,
-      numero: body.endereco.numero,
-      bairro: body.endereco.bairro,
-      complemento: body.endereco.complemento,
-      regiao: body.endereco.regiao.nome,
-    });
 
+
+
+  var endereco = new Endereco({
+
+    rua: body.endereco.rua,
+    numero: body.endereco.numero,
+    bairro: body.endereco.bairro,
+    complemento: body.endereco.complemento,
+    regiao: body.endereco.regiao.nome,
+  });
+  endereco.save(function (err, documentEnd) {
+    if (err)
+      console.log(err);
+    console.log("saved");
     var usuario = new User({
-      id: idValidoUser,
+
       login: body.login,
       senha: body.senha,
       email: body.email,
@@ -148,24 +151,17 @@ app.post("/Usuario/Register", function (req, res) {
       cpf: body.cpf,
       celular: body.celular,
       perfil: 1,
-      idendereco: idValidoEndereco,
+      idendereco: documentEnd._id,
       dependentes: []
     });
-    endereco.save(function (err) {
+    usuario.save(function (err, documentUser) {
       if (err)
         console.log(err);
       console.log("saved");
-    })
-
-    usuario.save(function (err) {
-      if (err)
-        console.log(err);
-      console.log("saved");
-    })
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.send(true);
-  }, 3000);
-
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.send(documentUser);
+    });
+  });
 })
 
 //função que cria a tabela no banco. A tabela é criada a partir de um arquivo xls. 
@@ -261,32 +257,6 @@ app.get("/CreateUsers/", function (req, res) {
 //     res.end(JSON.stringify("Created"));
 //   });
 // });
-getNewIdValidUser = function () {
-  let idNovo = 0;
-
-  var User = mongoose.model("Usuario", usuarioSchema);
-  User.find({}, function (err, result) {
-    if (result.length > 0)
-      idNovo = result[result.length - 1].id + 1;
-    else
-      idNovo = 1;
-
-    return idNovo;
-  });
-}
-getNewIdValidEndereco = function () {
-  let idNovo = 0;
-
-  var Endereco = mongoose.model("Endereco", enderecoSchema);
-  Endereco.find({}, function (err, result) {
-    if (result.length > 0)
-      idNovo = result[result.length - 1].id + 1;
-    else
-      idNovo = 1;
-
-    return idNovo;
-  });
-}
 
 var server = app.listen(3000, function () {
   var host = server.address().address
