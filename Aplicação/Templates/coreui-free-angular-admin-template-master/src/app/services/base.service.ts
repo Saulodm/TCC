@@ -38,7 +38,7 @@ export class BaseService {
     }
     xmlHttp.open("POST", this.urlBase + Url); // true for asynchronous 
     xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    // xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
     xmlHttp.send(body);
   }
 }

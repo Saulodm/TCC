@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Util } from './../../../shared/util';
 import { UsuarioService } from './../../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,8 @@ import { EnderecoViewModel } from '../../viewModels/enderecoViewModel';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(private usuarioService: UsuarioService,
+    public router: Router) {
    
   }
   public parte1Ativa: boolean;
@@ -49,7 +51,9 @@ export class RegisterComponent implements OnInit {
     this.usuario.celular = Util.prototype.MaskTelefone(this.usuario.celular);
   }
   Registrar(){
-    this.usuarioService.postUsuario(this.usuario);
+   var result = this.usuarioService.postUsuario(this.usuario);
+   alert("Cadastro executado!")
+   this.router.navigate(['login']);
   }
 
 }
