@@ -46,6 +46,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BaseService } from './services/base.service';
 import { PostoService } from './services/posto.service';
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 
 @NgModule({
@@ -62,8 +63,9 @@ import { PostoService } from './services/posto.service';
     TabsModule.forRoot(),
     ChartsModule,
     ngxbootstrap.ModalModule,
-    FormsModule
-    
+    FormsModule,
+    StorageServiceModule
+
   ],
   declarations: [
     AppComponent,
@@ -79,9 +81,9 @@ import { PostoService } from './services/posto.service';
     PostoService,
     UsuarioService,
     {
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
-  bootstrap: [ AppComponent ]
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,6 +7,9 @@ import { VacinaViewModel } from '../../viewModels/vacinaViewModel';
 })
 export class ChartJSComponent {
 
+  public dependenteSelecionado: any;
+  public pesquisaEuMesmo: boolean = true;
+
   listaVacinas: any[];
 
 
@@ -22,7 +25,7 @@ export class ChartJSComponent {
   public VORH: VacinaViewModel = new VacinaViewModel();
 
   constructor(private vacinaService: VacinaService) {
-
+    this.dependenteSelecionado = null
     this.listaVacinas = vacinaService.getVacinas();
 
     this.listaVacinas.forEach(vc => {

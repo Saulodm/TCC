@@ -35,7 +35,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'switches',
+        path: 'vacinas/cadastro',
         component: SwitchesComponent,
         data: {
           title: 'Switches'

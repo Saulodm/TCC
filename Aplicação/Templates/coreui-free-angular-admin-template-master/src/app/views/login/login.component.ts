@@ -1,9 +1,11 @@
+import { StorageKeys } from './../../../shared/storage-keys';
 import { LoginService } from './../../services/login.service';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { BsModalRef, ModalOptions, BsModalService } from 'ngx-bootstrap/modal';
 import * as ngxbootstrap from 'ngx-bootstrap'
-
+import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
+import { Inject } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +16,12 @@ export class LoginComponent {
   /**
    *
    */
-  constructor(public modalService: BsModalService,
+  constructor(@Inject(SESSION_STORAGE)
+    public storage: StorageService,
+    public modalService: BsModalService,
     public router: Router,
-    private loginService: LoginService) {
+    public loginService: LoginService,
+    ) {
 
 
   }
@@ -68,6 +73,8 @@ export class LoginComponent {
     } else {
       this.usuarioBusca = result[0];
       if (this.usuarioBusca.senha == this.senha) {
+
+        this.storage.set(StorageKeys.userId, this.usuarioBusca._id);
         this.router.navigate(['home']);
       } else {
         alert("Senha inválida!");
@@ -76,7 +83,7 @@ export class LoginComponent {
 
     //this.router.navigate(['register']);
   }
-  registrar(){
+  registrar() {
     this.router.navigate(['register']);
   }
 }
