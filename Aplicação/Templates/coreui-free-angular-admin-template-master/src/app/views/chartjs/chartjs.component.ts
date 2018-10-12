@@ -1,3 +1,4 @@
+import { VacinaCartaoViewModel } from './../../viewModels/vacinaCartaoViewModel';
 import { VacinaService } from './../../services/vacina.service';
 import { Component } from '@angular/core';
 import { VacinaViewModel } from '../../viewModels/vacinaViewModel';
@@ -9,9 +10,13 @@ export class ChartJSComponent {
 
   public dependenteSelecionado: any;
   public pesquisaEuMesmo: boolean = true;
+  public vacinaSelecionada: any;
 
   listaVacinas: any[];
-
+  listaVacinasDrop: any[];
+  listaVacinasPaciente: any[];
+  isCadastrando: boolean = false;
+  vacinaCadastro: VacinaCartaoViewModel;
 
   public AntimeningococicaCConjugada: VacinaViewModel = new VacinaViewModel();
   public Antipneumococica10ValenteConjugada: VacinaViewModel = new VacinaViewModel();
@@ -25,8 +30,12 @@ export class ChartJSComponent {
   public VORH: VacinaViewModel = new VacinaViewModel();
 
   constructor(private vacinaService: VacinaService) {
-    this.dependenteSelecionado = null
+    this.vacinaCadastro = new VacinaCartaoViewModel();
+    this.dependenteSelecionado = null;
+    this.vacinaSelecionada = null;
     this.listaVacinas = vacinaService.getVacinas();
+    this.listaVacinasPaciente = [];
+    this.listaVacinasDrop = [];
 
     this.listaVacinas.forEach(vc => {
       switch (vc.cod) {
@@ -94,5 +103,53 @@ export class ChartJSComponent {
 
     });
 
+    this.preencheDropVacinas();
+  }
+
+  cadastroShow() {
+    this.isCadastrando = true;
+  }
+  cadastrar() {
+    if (this.validaCadastro()) {
+      this.isCadastrando = false;
+      this.vacinaCadastro.Nome = this.vacinaSelecionada.nome;
+      this.vacinaService.postVacinaCartao(true, this.vacinaCadastro, "");
+      this.vacinaCadastro = new VacinaCartaoViewModel();
+      this.vacinaSelecionada = null;
+    }
+  }
+  preencheDropVacinas() {
+    var flags = {};
+    this.listaVacinasDrop = this.listaVacinas.filter(function (entry) {
+      if (flags[entry.nome]) {
+        return false;
+      }
+      flags[entry.nome] = true;
+      return true;
+    });
+
+  }
+  validaCadastro() {
+    if (this.vacinaSelecionada == null) {
+      alert("Selecione a Vacina.");
+      return false;
+
+    }
+    if (this.vacinaCadastro.Data == undefined || this.vacinaCadastro.Data == "") {
+      alert("Informe a data de vacinação.");
+      return false;
+
+    }
+    if (this.vacinaCadastro.Lote == undefined || this.vacinaCadastro.Lote == "") {
+      alert("Informe o lote da vacina.");
+      return false;
+
+    }
+    if (this.vacinaCadastro.Dose == undefined || this.vacinaCadastro.Lote == "") {
+      alert("Informe a dose da vacina.");
+      return false;
+
+    }
+    return true;
   }
 }

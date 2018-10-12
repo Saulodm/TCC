@@ -59,6 +59,13 @@ var vacinaSchema = new Schema({
   doses: Number
 });
 
+var vacinaCartaoSchema = new Schema({
+  idPaciente: String,
+  nome: String,
+  data: String,
+  lote: String,
+  dose: Number
+});
 var enderecoSchema = new Schema({
 
   rua: String,
@@ -161,6 +168,26 @@ app.post("/Usuario/Register", function (req, res) {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.send(documentUser);
     });
+  });
+})
+
+app.post("/Vacinas/Register", function (req, res) {
+  var VacinaCartao = mongoose.model("VacinaCartao", vacinaCartaoSchema);
+  var body = req.body;
+  var vacinaCartao = new VacinaCartao({
+    idPaciente: body.idpaciente,
+    nome: body.nome,
+    data: body.data,
+    lote: body.lote,
+    dose: body.dose
+  });
+  vacinaCartao.save(function (err, document) {
+    if (err)
+      console.log(err);
+    else
+      console.log("saved");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(document);
   });
 })
 
