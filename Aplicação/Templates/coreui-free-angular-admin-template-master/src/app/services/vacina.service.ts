@@ -20,29 +20,28 @@ export class VacinaService {
     })
     return result;
   }
-  postVacinaCartao(isUser: boolean, vacina: VacinaCartaoViewModel, idDependente: string): any {
+  postVacinaCartao(vacina: VacinaCartaoViewModel, idPaciente: string): any {
     var result;
-    var object = {}
-    if (isUser) {
-      object = {
-        idpaciente: this.storage.get(StorageKeys.userId),
-        nome: vacina.Nome,
-        data: vacina.Data,
-        lote: vacina.Lote,
-        dose: vacina.Dose
-      }
-    } else {
-      object = {
-        idpaciente: idDependente,
-        nome: vacina.Nome,
-        data: vacina.Data,
-        lote: vacina.Lote,
-        dose: vacina.Dose
-      }
+
+    var object = {
+      idpaciente: idPaciente,
+      cod: vacina.Cod,
+      nome: vacina.Nome,
+      data: vacina.Data,
+      lote: vacina.Lote,
+      dose: vacina.Dose
     }
     var vacinaCartao = JSON.stringify(object);
     this.baseService.httpPost("Vacinas/Register", vacinaCartao, res => {
-      result = res;
+      result = JSON.parse(res);
+    })
+    return result;
+  }
+
+  getCartaoVacina(id: string): any {
+    var result;
+    this.baseService.httpGet("Vacinas/Consulta/" + id, res => {
+      result = JSON.parse(res);
     })
     return result;
   }

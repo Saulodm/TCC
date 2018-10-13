@@ -61,6 +61,7 @@ var vacinaSchema = new Schema({
 
 var vacinaCartaoSchema = new Schema({
   idPaciente: String,
+  cod: Number,
   nome: String,
   data: String,
   lote: String,
@@ -97,6 +98,16 @@ app.get("/Regiao/:id", function (req, res) {
 app.get("/Usuario/:login", function (req, res) {
   var User = mongoose.model("Usuario", usuarioSchema);
   User.find({ login: req.params.login }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  });
+});
+app.get("/Usuario/Consulta/:id", function (req, res) {
+  var User = mongoose.model("Usuario", usuarioSchema);
+  User.find({ _id: req.params.id }, function (err, result) {
     if (err)
       console.log(err);
     console.log(result);
@@ -176,6 +187,7 @@ app.post("/Vacinas/Register", function (req, res) {
   var body = req.body;
   var vacinaCartao = new VacinaCartao({
     idPaciente: body.idpaciente,
+    cod: body.cod,
     nome: body.nome,
     data: body.data,
     lote: body.lote,
@@ -190,6 +202,17 @@ app.post("/Vacinas/Register", function (req, res) {
     res.send(document);
   });
 })
+
+app.get("/Vacinas/Consulta/:id", function (req, res) {
+  var VacinaCartao = mongoose.model("VacinaCartao", vacinaCartaoSchema);
+  VacinaCartao.find({ idPaciente: req.params.id }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  });
+});
 
 //função que cria a tabela no banco. A tabela é criada a partir de um arquivo xls. 
 app.get("/CreatePostos/", function (req, res) {

@@ -1,7 +1,6 @@
 export class VacinaViewModel{
-    public Nome: string;
-    public Dose: number;
-    public Idade: number;
-    public TipoIdade: string;
+    public Nome: string;  
     public Data: string;
+    public Lote: string;
+    public Dose: number;
 }

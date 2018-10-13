@@ -1,6 +1,6 @@
 export class Util {
 
-    MaskCpfCnpj(num) {
+    public static MaskCpfCnpj(num) {
 
         if (num) {
             num = num.replace(/\D/g, '');
@@ -41,7 +41,7 @@ export class Util {
         return num;
     }
 
-    MaskTelefone(num) {
+    public static MaskTelefone(num) {
         if (num) {
             num = num.toString();
             num = num.replace(/\D/g, "");
@@ -100,28 +100,28 @@ export class Util {
         return num;
     }
     //valida telefone
-    ValidaTelefone(tel) {
+    public static ValidaTelefone(tel) {
         var exp = /\(\d{2}\)\ \d{4}\-\d{4}/
         if (!exp.test(tel.value))
             alert('Numero de Telefone Invalido!');
     }
 
     //valida CEP
-    ValidaCep(cep) {
+    public static ValidaCep(cep) {
         var exp = /\d{2}\.\d{3}\-\d{3}/
         if (!exp.test(cep.value))
             alert('Numero de Cep Invalido!');
     }
 
     //valida data
-    ValidaData(data) {
+    public static ValidaData(data) {
         var exp = /\d{2}\/\d{2}\/\d{4}/
         if (!exp.test(data.value))
             alert('Data Invalida!');
     }
 
     //valida o CPF digitado
-    ValidarCPF(Objcpf) {
+    public static ValidarCPF(Objcpf) {
         var cpf = Objcpf.value;
         var exp = /\.|\-/g
         cpf = cpf.toString().replace(exp, "");
@@ -143,7 +143,7 @@ export class Util {
     }
 
     //valida o CNPJ digitado
-    ValidarCNPJ(ObjCnpj) {
+    public static ValidarCNPJ(ObjCnpj) {
         var cnpj = ObjCnpj.value;
         var valida = new Array(6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2);
         var dig1 = 0;
@@ -165,5 +165,8 @@ export class Util {
 
     }
 
-
+    public static FormataData(data: string) {
+        var array = data.split('-');
+        return array[2] + "/" + array[1] + "/" + array[0]
+    }
 }

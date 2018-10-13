@@ -35,7 +35,7 @@
 
           <div class="form-inline">
             <div class="col-2">
-              <button class="btn btn-primary"> Consultar </button>
+              <button class="btn btn-primary" (click)="consultar()"> Consultar </button>
             </div>
             <div class="col-10">
               <button class="btn btn-primary" style="float:right" (click)="cadastroShow()"> Cadastrar </button>
@@ -100,30 +100,33 @@
 
     <div class="card">
       <div class="card-header">
-        Lista de Vacinas cadastradas
-
+        Nome Paciente: {{nomePaciente}}
       </div>
       <div class="card-body">
 
         <div class="row">
           <div class="column col-3" style="background-color:#aaa;">
-            <h5><strong>Nome:</strong> {{AntimeningococicaCConjugada.Nome}} </h5>
+            <h5 *ngIf="AntimeningococicaCConjugada.Nome != undefined"><strong>Nome:</strong> {{AntimeningococicaCConjugada.Nome}} </h5>
+            <h5 *ngIf="AntimeningococicaCConjugada.Nome == undefined" style="color:red;"><strong>Nome:</strong> Antimeningocócica C conjugada </h5>
             <h5><strong>Dose:</strong> {{AntimeningococicaCConjugada.Dose}}</h5>
             <h5><strong>Data:</strong> {{AntimeningococicaCConjugada.Data}}</h5>
           </div>
           <div class="column col-3" style="background-color:#bbb;">
-            <h5><strong>Nome:</strong> {{Antipneumococica10ValenteConjugada.Nome}} </h5>
+            <h5 *ngIf="Antipneumococica10ValenteConjugada.Nome != undefined"><strong>Nome:</strong> {{Antipneumococica10ValenteConjugada.Nome}} </h5>
+            <h5 *ngIf="Antipneumococica10ValenteConjugada.Nome == undefined" style="color:red;"><strong>Nome:</strong> Antipneumocócica 10 valente conjugada</h5>
             <h5><strong>Dose:</strong> {{Antipneumococica10ValenteConjugada.Dose}}</h5>
             <h5><strong>Data:</strong> {{Antipneumococica10ValenteConjugada.Data}}</h5>
           </div>
           <div class="column col-3" style="background-color:#aaa;">
-            <h5><strong>Nome:</strong> {{BCGID.Nome}} </h5>
+            <h5 *ngIf="BCGID.Nome != undefined"><strong>Nome:</strong> {{BCGID.Nome}} </h5>
+            <h5 *ngIf="BCGID.Nome == undefined" style="color:red;"><strong>Nome:</strong> BCG-ID </h5>
             <h5><strong>Dose:</strong> {{BCGID.Dose}}</h5>
             <h5><strong>Data:</strong> {{BCGID.Data}}</h5>
 
           </div>
           <div class="column col-3" style="background-color:#bbb;">
-            <h5><strong>Nome:</strong> {{DTP.Nome}} </h5>
+            <h5 *ngIf="DTP.Nome != undefined"><strong>Nome:</strong> {{DTP.Nome}} </h5>
+            <h5 *ngIf="DTP.Nome == undefined" style="color:red;"><strong>Nome:</strong> DTP(tríplice bacteriana) </h5>
             <h5><strong>Dose:</strong> {{DTP.Dose}}</h5>
             <h5><strong>Data:</strong> {{DTP.Data}}</h5>
 
@@ -133,25 +136,29 @@
         <br/>
         <div class="row">
           <div class="column col-3" style="background-color:#aaa;">
-            <h5><strong>Nome:</strong> {{FebreAmarela.Nome}} </h5>
+            <h5 *ngIf="FebreAmarela.Nome != undefined"><strong>Nome:</strong> {{FebreAmarela.Nome}} </h5>
+            <h5 *ngIf="FebreAmarela.Nome == undefined" style="color:red;"><strong>Nome:</strong> Febre Amarela </h5>
             <h5><strong>Dose:</strong> {{FebreAmarela.Dose}}</h5>
             <h5><strong>Data:</strong> {{FebreAmarela.Data}}</h5>
 
           </div>
           <div class="column col-3" style="background-color:#bbb;">
-            <h5><strong>Nome:</strong> {{HepatitieB.Nome}} </h5>
+            <h5 *ngIf="HepatitieB.Nome != undefined"><strong>Nome:</strong> {{HepatitieB.Nome}} </h5>
+            <h5 *ngIf="HepatitieB.Nome == undefined" style="color:red;"><strong>Nome:</strong> Hepatitie B </h5>
             <h5><strong>Dose:</strong> {{HepatitieB.Dose}}</h5>
             <h5><strong>Data:</strong> {{HepatitieB.Data}}</h5>
 
           </div>
           <div class="column col-3" style="background-color:#aaa;">
-            <h5><strong>Nome:</strong> {{SRC.Nome}} </h5>
+            <h5 *ngIf="SRC.Nome != undefined"><strong>Nome:</strong> {{SRC.Nome}} </h5>
+            <h5 *ngIf="SRC.Nome == undefined" style="color:red;"><strong>Nome:</strong> SRC (tríplice viral, MMR) </h5>
             <h5><strong>Dose:</strong> {{SRC.Dose}}</h5>
             <h5><strong>Data:</strong> {{SRC.Data}}</h5>
 
           </div>
           <div class="column col-3" style="background-color:#bbb;">
-            <h5><strong>Nome:</strong> {{Tetravalente.Nome}} </h5>
+            <h5 *ngIf="Tetravalente.Nome != undefined"><strong>Nome:</strong> {{Tetravalente.Nome}} </h5>
+            <h5 *ngIf="Tetravalente.Nome == undefined" style="color:red;"><strong>Nome:</strong> Tetravalente (DTP + Hib) </h5>
             <h5><strong>Dose:</strong> {{Tetravalente.Dose}}</h5>
             <h5><strong>Data:</strong> {{Tetravalente.Data}}</h5>
 
@@ -162,13 +169,15 @@
 
         <div class="row">
           <div class="column col-3" style="background-color:#aaa;">
-            <h5><strong>Nome:</strong> {{VOP.Nome}} </h5>
+            <h5 *ngIf="VOP.Nome != undefined"><strong>Nome:</strong> {{VOP.Nome}} </h5>
+            <h5 *ngIf="VOP.Nome == undefined" style="color:red;"><strong>Nome:</strong> VOP(vacina oral contra a poliomelite - Sabin) </h5>
             <h5><strong>Dose:</strong> {{VOP.Dose}}</h5>
             <h5><strong>Data:</strong> {{VOP.Data}}</h5>
 
           </div>
           <div class="column col-3" style="background-color:#bbb;">
-            <h5><strong>Nome:</strong> {{VORH.Nome}} </h5>
+            <h5 *ngIf="VORH.Nome != undefined"><strong>Nome:</strong> {{VORH.Nome}} </h5>
+            <h5 *ngIf="VORH.Nome == undefined" style="color:red;"><strong>Nome:</strong> VORH (vacina oral contra rotavírus humano) </h5>
             <h5><strong>Dose:</strong> {{VORH.Dose}}</h5>
             <h5><strong>Data:</strong> {{VORH.Data}}</h5>
 

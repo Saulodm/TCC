@@ -45,10 +45,10 @@ export class RegisterComponent implements OnInit {
   }
 
   CPFMask(){
-    this.usuario.cpf = Util.prototype.MaskCpfCnpj(this.usuario.cpf);
+    this.usuario.cpf = Util.MaskCpfCnpj(this.usuario.cpf);
   }
   TelefoneMask(){
-    this.usuario.celular = Util.prototype.MaskTelefone(this.usuario.celular);
+    this.usuario.celular = Util.MaskTelefone(this.usuario.celular);
   }
   Registrar(){
    var result = this.usuarioService.postUsuario(this.usuario);
