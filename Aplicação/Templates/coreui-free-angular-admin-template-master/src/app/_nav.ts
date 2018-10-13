@@ -7,12 +7,19 @@ export const navItems = [
   {
     name: 'Cartão de Vacina',
     url: '/vacinas',
-    icon: 'icon-pie-chart'
+    icon: 'fa fa-calendar'
+  },
+
+  {
+    name: 'Dependentes',
+    url: '/base/dependente',
+    icon: 'fa fa-child'
+
   },
   {
     name: 'Consultar Paciente',
     url: '/icons',
-    icon: 'icon-doc'
+    icon: 'fa fa-file-text-o'
 
   },
   {
@@ -23,7 +30,7 @@ export const navItems = [
   {
     name: 'Hospitais',
     url: '/buttons',
-    icon: 'icon-heart'
+    icon: 'fa fa-heartbeat'
   },
   {
     divider: true

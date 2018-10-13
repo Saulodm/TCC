@@ -56,7 +56,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'carousels',
+        path: 'dependente',
         component: CarouselsComponent,
         data: {
           title: 'Carousels'

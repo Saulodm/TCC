@@ -42,13 +42,7 @@ var usuarioSchema = new Schema({
   dataNascimento: String,
   perfil: Number,
   cpf: String,
-  celular: String,
-  dependentes: [{
-    nome: String,
-    sobrenome: String,
-    cpf: String,
-    parentesco: String
-  }]
+  celular: String
 
 });
 var vacinaSchema = new Schema({
@@ -75,6 +69,13 @@ var enderecoSchema = new Schema({
   complemento: String,
   regiao: String,
 });
+
+var dependenteSchema = new Schema({
+  idParente: String,
+  nome: String,
+  cpf: String,
+  datanascimento: String
+});
 mongoose.Promise = global.Promise;
 // mongoose.createConnection(url, {
 //   useMongoClient: true  
@@ -92,8 +93,6 @@ app.get("/Regiao/:id", function (req, res) {
     res.end(JSON.stringify(result));
   });
 });
-
-
 
 app.get("/Usuario/:login", function (req, res) {
   var User = mongoose.model("Usuario", usuarioSchema);
@@ -200,6 +199,37 @@ app.post("/Vacinas/Register", function (req, res) {
       console.log("saved");
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(document);
+  });
+})
+
+app.post("/Dependente/Register", function (req, res) {
+  var Dependente = mongoose.model("Dependente", dependenteSchema);
+  var body = req.body;
+  var dependente = new Dependente({
+    idParente: body.idusuario,
+    nome: body.nome,
+    cpf: body.cpf,
+    datanascimento: body.datanascimento
+  });
+  dependente.save(function (err, document) {
+    if (err)
+      console.log(err);
+    else
+      console.log("saved");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(document);
+  });
+})
+
+app.get("/Dependente/Consulta/:idusuario", function (req, res) {
+  var Dependente = mongoose.model("Dependente", dependenteSchema);
+
+  Dependente.find({ idParente: req.params.idusuario }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
   });
 })
 
