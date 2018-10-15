@@ -32,10 +32,17 @@ export class CarouselsComponent {
     this.consultaDependentes();
   }
   consultaDependentes() {
-    this.listaDepedentes= [];
+    this.listaDepedentes = [];
     var result = this.dependenteService.getDependentes(this.storage.get(StorageKeys.userId)) as Array<any>;
     result.forEach(dp => {
+      dp.datanascimento = Util.FormataData(dp.datanascimento);
       this.listaDepedentes.push(dp);
     });
+  }
+
+  deletarDependente(id: string) {
+    this.dependenteService.deleteDependente(id);
+    alert("Dependente removido");    
+    this.consultaDependentes();
   }
 }

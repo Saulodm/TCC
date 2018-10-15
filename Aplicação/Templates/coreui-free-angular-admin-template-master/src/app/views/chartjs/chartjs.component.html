@@ -10,7 +10,7 @@
           </div>
           <div class="col-6">
             <label class="switch switch-3d switch-primary">
-            <input type="checkbox" [(ngModel)]="pesquisaEuMesmo" class="switch-input" checked>
+            <input type="checkbox" [disabled]="listaDependentes.length == 0" [(ngModel)]="pesquisaEuMesmo" class="switch-input" checked>
             <span class="switch-slider"></span>
           </label>
           </div>
@@ -21,10 +21,10 @@
             <label>Dependente :</label>
           </div>
           <div class="col-6">
-            <select [disabled]="pesquisaEuMesmo" [(ngModel)]="dependenteSelecionado" class="form-control" [ngModelOptions]="{standalone: true}">
+            <select [disabled]="pesquisaEuMesmo || listaDependentes.length == 0" [(ngModel)]="dependenteSelecionado" class="form-control" [ngModelOptions]="{standalone: true}">
                   
                   <option selected [ngValue]="null">Selecione o dependente</option>						
-                  <!-- <option *ngFor="let c of Postos" [ngValue]="c.cod">{{c.nome}}</option> -->
+                  <option *ngFor="let c of listaDependentes" [ngValue]="c">{{c.nome}}</option>
                   </select>
           </div>
 
@@ -69,7 +69,7 @@
         </div>
         <div class=" mb-3">
           <label style="float: left;">Dose: </label>
-          <input type="number" class="form-control" [(ngModel)]="vacinaCadastro.Dose" placeholder="Dose vacina">
+          <input type="text" class="form-control" [(ngModel)]="vacinaCadastro.Dose" placeholder="Dose vacina">
           <small>Caso seja dose única informe 0.</small>
         </div>
 
@@ -83,6 +83,33 @@
       </div>
       <div class="col-3"></div>
     </div>
+  </div>
+  <br/>
+
+  <div class="row" *ngIf="listaVacinasPaciente.length > 0 && isCadastrando">
+    <div class="col-3"></div>
+    <div class="form-control col-6" style="height:auto !important;">
+      <ul>
+        <li *ngFor="let dp of listaVacinasPaciente">
+          <div class="row">
+            <div class="col-6">
+              <label>Nome: {{dp.nome}} </label>
+              <br/>
+              <label>Lote: {{dp.lote}} </label>
+              <br/>
+              <label>Data: {{dp.data}} </label>
+              <br/>
+              <label>Dose: {{dp.dose}} </label>
+            </div>
+            <div class="col-6" style="text-align:end;">
+              <button class="btn btn-danger" title="Remover" (click)=" deletarVacina(dp._id)"><i class="fa fa-trash"></i></button>
+            </div>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+    <div class="col-3"></div>
   </div>
 
   <div *ngIf="listaVacinasPaciente.length == 0 && !isCadastrando" class="col-12">
@@ -199,5 +226,6 @@
       </div>
     </div>
   </div>
+  <br/>
 
 </div>

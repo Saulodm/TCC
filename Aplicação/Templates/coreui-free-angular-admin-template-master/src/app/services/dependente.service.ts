@@ -31,4 +31,12 @@ export class DependenteService {
     })
     return result;
   }
+
+  deleteDependente(id) {
+    var result = {};
+    this.baseService.httpDelete("Dependente/" + id, res => {
+      result = JSON.parse(res);
+    })
+    return result;
+  }
 }

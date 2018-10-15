@@ -244,6 +244,26 @@ app.get("/Vacinas/Consulta/:id", function (req, res) {
   });
 });
 
+app.delete("/Dependente/:id", function (req, res) {
+  var Dependente = mongoose.model("Dependente", dependenteSchema);
+  Dependente.findByIdAndDelete({ _id: req.params.id }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  })
+})
+app.delete("/Vacinas/:id", function (req, res) {
+  var VacinaCartao = mongoose.model("VacinaCartao", vacinaCartaoSchema);
+  VacinaCartao.findByIdAndDelete({ _id: req.params.id }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  })
+})
 //função que cria a tabela no banco. A tabela é criada a partir de um arquivo xls. 
 app.get("/CreatePostos/", function (req, res) {
   console.log("connected");

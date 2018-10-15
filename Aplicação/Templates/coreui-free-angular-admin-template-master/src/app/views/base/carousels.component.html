@@ -30,16 +30,39 @@
     <div class="col-3"></div>
   </div>
   <br/>
-  <div class="row">
+  <div class="row" *ngIf="listaDepedentes.length == 0">
+    <div class="col-3"></div>
+
+    <div class="form-control col-6" style="height:auto !important;">
+      <div style="text-align: center; ">
+        <i class="fa fa-exclamation fa-lg mt-4"></i>
+      </div>
+      <div style="text-align: center; ">
+        <label><strong>Não existem dependentes cadastrados.</strong></label>
+      </div>
+
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+  <div class="row" *ngIf="listaDepedentes.length > 0">
     <div class="col-3"></div>
     <div class="form-control col-6" style="height:auto !important;">
       <ul>
         <li *ngFor="let dp of listaDepedentes">
-          <label>Nome: {{dp.nome}} </label>
-          <br/>
-          <label>CPF: {{dp.nome}} </label>
-          <br/>
-          <label>Data de Nascimento: {{dp.datanascimento}} </label>
+          <div class="row">
+            <div class=" col-6">
+              <label>Nome: {{dp.nome}} </label>
+              <br/>
+              <label>CPF: {{dp.cpf}} </label>
+              <br/>
+              <label>Data de Nascimento: {{dp.datanascimento}} </label>
+            </div>
+            <div class="col-6" style="text-align:end;">
+              <button class="btn btn-danger" title="Remover" (click)=" deletarDependente(dp._id)"> <i class="fa fa-trash" ></i></button>
+            </div>
+          </div>
+
         </li>
       </ul>
     </div>

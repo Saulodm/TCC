@@ -1,3 +1,4 @@
+import { DependenteService } from './../../services/dependente.service';
 import { Util } from './../../../shared/util';
 import { UsuarioService } from './../../services/usuario.service';
 import { StorageKeys } from './../../../shared/storage-keys';
@@ -19,6 +20,7 @@ export class ChartJSComponent {
   listaVacinas: any[];
   listaVacinasDrop: any[];
   listaVacinasPaciente: any[];
+  listaDependentes: any[];
   isCadastrando: boolean = false;
   vacinaCadastro: VacinaCartaoViewModel;
   nomePaciente: string;
@@ -36,7 +38,8 @@ export class ChartJSComponent {
   constructor( @Inject(SESSION_STORAGE)
   public storage: StorageService,
     private vacinaService: VacinaService,
-    private usuarioService: UsuarioService) {
+    private usuarioService: UsuarioService,
+    private dependenteService: DependenteService) {
     this.vacinaCadastro = new VacinaCartaoViewModel();
     this.dependenteSelecionado = null;
     this.vacinaSelecionada = null;
@@ -44,6 +47,10 @@ export class ChartJSComponent {
     this.listaVacinasPaciente = [];
     this.listaVacinasDrop = [];
 
+
+    this.listaDependentes = [];
+
+    this.listaDependentes = this.dependenteService.getDependentes(this.storage.get(StorageKeys.userId)) as Array<any>;
 
     this.preencheDropVacinas();
     this.consultar();
@@ -60,7 +67,7 @@ export class ChartJSComponent {
       if (this.pesquisaEuMesmo) {
         this.vacinaService.postVacinaCartao(this.vacinaCadastro, this.storage.get(StorageKeys.userId));
       } else {
-        this.vacinaService.postVacinaCartao(this.vacinaCadastro, "");
+        this.vacinaService.postVacinaCartao(this.vacinaCadastro, this.dependenteSelecionado._id);
 
       }
       this.vacinaCadastro = new VacinaCartaoViewModel();
@@ -70,12 +77,25 @@ export class ChartJSComponent {
   }
 
   consultar() {
+    this.listaVacinasPaciente = [];
+    this.limparVacinas();
     if (this.pesquisaEuMesmo) {
-      this.listaVacinasPaciente = this.vacinaService.getCartaoVacina(this.storage.get(StorageKeys.userId));
+
+      var result = this.vacinaService.getCartaoVacina(this.storage.get(StorageKeys.userId));
+      result.forEach(vc => {
+        vc.lote = vc.lote.toUpperCase();
+        vc.data = Util.FormataData(vc.data);
+        this.listaVacinasPaciente.push(vc);
+      });
       var paciente = this.usuarioService.getUsuario(this.storage.get(StorageKeys.userId))[0];
       this.nomePaciente = paciente.nome.trim() + " " + paciente.sobrenome.trim();
     } else {
-      this.listaVacinasPaciente = this.vacinaService.getCartaoVacina("");
+      var result = this.vacinaService.getCartaoVacina(this.dependenteSelecionado._id);
+      result.forEach(vc => {
+        vc.lote = vc.lote.toUpperCase();
+        vc.data = Util.FormataData(vc.data);
+        this.listaVacinasPaciente.push(vc);
+      });
       this.usuarioService.getUsuario("");
     }
     if (this.listaVacinasPaciente.length > 0) {
@@ -83,62 +103,62 @@ export class ChartJSComponent {
         switch (vc.cod) {
           case 1:
             this.AntimeningococicaCConjugada.Nome = vc.nome;
-            this.AntimeningococicaCConjugada.Lote = vc.lote.toUpperCase();
-            this.AntimeningococicaCConjugada.Data = Util.FormataData(vc.data);
+            this.AntimeningococicaCConjugada.Lote = vc.lote;
+            this.AntimeningococicaCConjugada.Data = vc.data;
             this.AntimeningococicaCConjugada.Dose = vc.dose;
             break;
           case 2:
             this.Antipneumococica10ValenteConjugada.Nome = vc.nome;
-            this.Antipneumococica10ValenteConjugada.Lote = vc.lote.toUpperCase();
-            this.Antipneumococica10ValenteConjugada.Data = Util.FormataData(vc.data);
+            this.Antipneumococica10ValenteConjugada.Lote = vc.lote;
+            this.Antipneumococica10ValenteConjugada.Data = vc.data;
             this.Antipneumococica10ValenteConjugada.Dose = vc.dose;
             break;
           case 3:
             this.BCGID.Nome = vc.nome;
-            this.BCGID.Lote = vc.lote.toUpperCase();
-            this.BCGID.Data = Util.FormataData(vc.data);
+            this.BCGID.Lote = vc.lote;
+            this.BCGID.Data = vc.data;
             this.BCGID.Dose = vc.dose;
             break;
           case 4:
             this.DTP.Nome = vc.nome;
-            this.DTP.Lote = vc.lote.toUpperCase();
-            this.DTP.Data = Util.FormataData(vc.data);
+            this.DTP.Lote = vc.lote;
+            this.DTP.Data = vc.data;
             this.DTP.Dose = vc.dose;
             break;
           case 5:
             this.FebreAmarela.Nome = vc.nome;
-            this.FebreAmarela.Lote = vc.lote.toUpperCase();
-            this.FebreAmarela.Data = Util.FormataData(vc.data);
+            this.FebreAmarela.Lote = vc.lote;
+            this.FebreAmarela.Data = vc.data;
             this.FebreAmarela.Dose = vc.dose;
             break;
           case 6:
             this.HepatitieB.Nome = vc.nome;
-            this.HepatitieB.Lote = vc.lote.toUpperCase();
-            this.HepatitieB.Data = Util.FormataData(vc.data);
+            this.HepatitieB.Lote = vc.lote;
+            this.HepatitieB.Data = vc.data;
             this.HepatitieB.Dose = vc.dose;
             break;
           case 7:
             this.SRC.Nome = vc.nome;
-            this.SRC.Lote = vc.lote.toUpperCase();
-            this.SRC.Data = Util.FormataData(vc.data);
+            this.SRC.Lote = vc.lote;
+            this.SRC.Data = vc.data;
             this.SRC.Dose = vc.dose;
             break;
           case 8:
             this.Tetravalente.Nome = vc.nome;
-            this.Tetravalente.Lote = vc.lote.toUpperCase();
-            this.Tetravalente.Data = Util.FormataData(vc.data);
+            this.Tetravalente.Lote = vc.lote;
+            this.Tetravalente.Data = vc.data;
             this.Tetravalente.Dose = vc.dose;
             break;
           case 9:
             this.VOP.Nome = vc.nome;
-            this.VOP.Lote = vc.lote.toUpperCase();
-            this.VOP.Data = Util.FormataData(vc.data);
+            this.VOP.Lote = vc.lote;
+            this.VOP.Data = vc.data;
             this.VOP.Dose = vc.dose;
             break;
           case 10:
             this.VORH.Nome = vc.nome;
-            this.VORH.Lote = vc.lote.toUpperCase();
-            this.VORH.Data = Util.FormataData(vc.data);
+            this.VORH.Lote = vc.lote;
+            this.VORH.Data = vc.data;
             this.VORH.Dose = vc.dose;
             break;
         }
@@ -181,5 +201,22 @@ export class ChartJSComponent {
 
     }
     return true;
+  }
+  limparVacinas() {
+    this.AntimeningococicaCConjugada = new VacinaViewModel();
+    this.Antipneumococica10ValenteConjugada = new VacinaViewModel();
+    this.BCGID = new VacinaViewModel();
+    this.DTP = new VacinaViewModel();
+    this.FebreAmarela = new VacinaViewModel();
+    this.HepatitieB = new VacinaViewModel();
+    this.SRC = new VacinaViewModel();
+    this.Tetravalente = new VacinaViewModel();
+    this.VOP = new VacinaViewModel();
+    this.VORH = new VacinaViewModel();
+  }
+  deletarVacina(id: string){
+    this.vacinaService.deletarCartaoVacina(id);
+    alert("Vacina removida");    
+    this.consultar();
   }
 }

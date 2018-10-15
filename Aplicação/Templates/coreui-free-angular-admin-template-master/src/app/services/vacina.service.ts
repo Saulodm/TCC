@@ -46,4 +46,12 @@ export class VacinaService {
     return result;
   }
 
+  deletarCartaoVacina(id: string) {
+    var result;
+    this.baseService.httpDelete("Vacinas/" + id, res => {
+      result = JSON.parse(res);
+    })
+    return result;
+  }
+
 }

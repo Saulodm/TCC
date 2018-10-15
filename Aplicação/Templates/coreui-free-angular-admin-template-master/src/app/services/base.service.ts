@@ -41,4 +41,15 @@ export class BaseService {
     xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
     xmlHttp.send(body);
   }
+
+  httpDelete(Url, callback){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    }
+
+    xmlHttp.open("DELETE", this.urlBase + Url, false); // true for asynchronous 
+    xmlHttp.send();
+  }
 }
