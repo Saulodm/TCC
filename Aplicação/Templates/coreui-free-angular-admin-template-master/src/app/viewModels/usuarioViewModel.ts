@@ -11,5 +11,5 @@ export class UsuarioViewModel {
     celular: number;
     perfil: number;
     endereco: EnderecoViewModel;
-    dependetes: DependenteViewModel[];
+    
 }

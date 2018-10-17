@@ -63,7 +63,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'collapses',
+        path: 'medicos',
         component: CollapsesComponent,
         data: {
           title: 'Collapses'

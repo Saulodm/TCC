@@ -1,26 +1,63 @@
 <div class="animated fadeIn">
-  <div class="card">
-    <div class="card-header">
-      Bootstrap Collapse
-      <div class="card-header-actions">
-        <a href="https://valor-software.com/ngx-bootstrap/#/collapse" target="_blank">
-          <small className="text-muted">docs</small>
-        </a>
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card mx-6">
+        <div class="card-body p-4">
+          <form>
+            <h1>Cadastrar Médico</h1>
+            <p class="text-muted">Dados da conta</p>
+            <div class="input-group mb-3">
+
+              <input type="text" [(ngModel)]="usuario.login" name="login" class="form-control" placeholder="Nome de usuário" autocomplete="username"
+                required>
+            </div>
+            <div class="input-group mb-3">
+
+              <input type="text" [(ngModel)]="usuario.email" name="email" class="form-control" placeholder="Email" autocomplete="email"
+                required>
+            </div>
+            <div class="input-group mb-3">
+
+              <input type="password" [(ngModel)]="usuario.senha" name="senha" class="form-control" placeholder="Senha" autocomplete="new-password"
+                required>
+            </div>
+            <div class="input-group mb-4">
+
+              <input type="password" [(ngModel)]="senhaRepetida" name="senharepete" class="form-control" placeholder="Repita a senha" autocomplete="new-password"
+                required>
+            </div>
+
+
+            <p class="text-muted">Dados pessoais e médicos</p>
+            <div class="input-group mb-3">
+
+              <input type="text" [(ngModel)]="usuario.nome" name="nome" class="form-control" placeholder="Nome" autocomplete="nome" required>
+            </div>
+            <div class="input-group mb-3">
+
+              <input type="text" [(ngModel)]="usuario.sobrenome" name="sobrenome" class="form-control" placeholder="Sobrenome" autocomplete="sobrenome"
+                required>
+            </div>
+            <div class="input-group mb-3">
+
+              <input type="text" [(ngModel)]="crm" name="crm" (ngModelChange)="CRMMask()" class="form-control" placeholder="CRM" autocomplete="CRM"
+                required>
+            </div>
+            <div class="input-group mb-3">
+
+              <input type="text" [(ngModel)]="usuario.cpf" name="cpf" (ngModelChange)="CPFMask()" class="form-control" placeholder="CPF"
+                autocomplete="CPF" required>
+            </div>
+            <div class="input-group mb-3">
+
+              <input type="text" [(ngModel)]="usuario.celular" name="celular" (ngModelChange)="TelefoneMask()" class="form-control" placeholder="Celular"
+                autocomplete="celular" required>
+            </div>
+            <br/>
+            <button type="button" (click)="Registrar()" class="btn btn-block btn-success">Cadastrar</button>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="card-body"
-         (collapsed)="collapsed($event)"
-         (expanded)="expanded($event)"
-         [collapse]="isCollapsed">
-      <p>
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-        consequat.
-      </p>
-    </div>
-    <div class="card-footer">
-      <button type="button" class="btn btn-primary"
-              (click)="isCollapsed = !isCollapsed">Toggle collapse
-      </button>
     </div>
   </div>
 </div>

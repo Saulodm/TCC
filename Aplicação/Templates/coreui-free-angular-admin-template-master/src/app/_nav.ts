@@ -6,6 +6,18 @@ export const navItems = [
     perfil: 1
   },
   {
+    name: 'Home',
+    url: '/home',
+    icon: 'icon-home',
+    perfil: 3
+  },
+  {
+    name: 'Home',
+    url: '/home',
+    icon: 'icon-home',
+    perfil: 2
+  },
+  {
     name: 'Cartão de Vacina',
     url: '/vacinas',
     icon: 'fa fa-calendar',
@@ -37,6 +49,12 @@ export const navItems = [
     url: '/buttons',
     icon: 'fa fa-heartbeat',
     perfil: 1
+  },
+  {
+    name: 'Cadastrar Médico',
+    url: '/base/medicos',
+    icon: 'fa fa-heartbeat',
+    perfil: 3
   },
   {
     divider: true

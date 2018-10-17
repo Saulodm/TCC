@@ -76,6 +76,10 @@ var dependenteSchema = new Schema({
   cpf: String,
   datanascimento: String
 });
+var medicoSchema = new Schema({
+  crm: String,
+  idMed: String
+});
 mongoose.Promise = global.Promise;
 // mongoose.createConnection(url, {
 //   useMongoClient: true  
@@ -257,6 +261,68 @@ app.delete("/Dependente/:id", function (req, res) {
 app.delete("/Vacinas/:id", function (req, res) {
   var VacinaCartao = mongoose.model("VacinaCartao", vacinaCartaoSchema);
   VacinaCartao.findByIdAndDelete({ _id: req.params.id }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  })
+})
+
+app.post("/Medico/Register", function (req, res) {
+  var User = mongoose.model("Usuario", usuarioSchema);
+  var Medico = mongoose.model("Medico", medicoSchema);
+  var body = req.body;
+
+
+
+  var usuario = new User({
+
+    login: body.login,
+    senha: body.senha,
+    email: body.email,
+    nome: body.nome,
+    sobrenome: body.sobrenome,
+    dataNascimento: body.datanascimento,
+    cpf: body.cpf,
+    celular: body.celular,
+    perfil: 2,
+    idendereco: ""
+  });
+  usuario.save(function (err, documentUser) {
+    if (err)
+      console.log(err);
+    console.log("saved");
+    var med = new Medico({
+      crm: body.crm,
+      idMed: documentUser._id
+    });
+    med.save(function (err, documentMed) {
+      if (err)
+        console.log(err);
+      else
+        console.log("saved");
+
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.send(documentUser);
+    });
+  });
+})
+
+app.get("/Medico/Consulta/:id", function (req, res) {
+  var Medico = mongoose.model("Medico", medicoSchema);
+  Medico.find({ _id: req.params.id }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  });
+});
+
+app.delete("/Medico/:id", function (req, res) {
+  var Medico = mongoose.model("Medico", medicoSchema);
+  Medico.findByIdAndDelete({ _id: req.params.id }, function (err, result) {
     if (err)
       console.log(err);
     console.log(result);
