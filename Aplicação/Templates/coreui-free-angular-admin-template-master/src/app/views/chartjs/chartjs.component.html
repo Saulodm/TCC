@@ -92,7 +92,7 @@
       <ul>
         <li *ngFor="let dp of listaVacinasPaciente">
           <div class="row">
-            <div class="col-6">
+            <div class="col-8">
               <label>Nome: {{dp.nome}} </label>
               <br/>
               <label>Lote: {{dp.lote}} </label>
@@ -101,7 +101,9 @@
               <br/>
               <label>Dose: {{dp.dose}} </label>
             </div>
-            <div class="col-6" style="text-align:end;">
+            <div class="col-4" style="text-align:end;">
+              <button class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i></button>
+              &nbsp;
               <button class="btn btn-danger" title="Remover" (click)=" deletarVacina(dp._id)"><i class="fa fa-trash"></i></button>
             </div>
           </div>

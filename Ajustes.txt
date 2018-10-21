@@ -1,1 +1,0 @@
-*procurar info. dados da vacina  (colocar lote na vacina).

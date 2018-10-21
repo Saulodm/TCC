@@ -1,0 +1,4 @@
+Angular
+Node
+	-mongoose
+Mongo
