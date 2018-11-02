@@ -1,0 +1,5 @@
+Melhorar a introdução fazendo o link com o problema e os objetivos.
+
+mudar a metodologia colocando os métodos envolvidos no projeto
+
+colocar alguns detalhes técnicos na implementação
