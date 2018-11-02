@@ -1,3 +1,4 @@
+import { VacinaService } from './../../services/vacina.service';
 import { StorageKeys } from './../../../shared/storage-keys';
 import { LoginService } from './../../services/login.service';
 import { Router } from '@angular/router';
@@ -6,7 +7,8 @@ import { BsModalRef, ModalOptions, BsModalService } from 'ngx-bootstrap/modal';
 import * as ngxbootstrap from 'ngx-bootstrap'
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 import { Inject } from '@angular/core';
-
+import * as moment from 'moment'
+import 'moment/locale/pt-br';
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'login.component.html'
@@ -16,22 +18,34 @@ export class LoginComponent {
   /**
    *
    */
-  constructor(@Inject(SESSION_STORAGE)
-    public storage: StorageService,
-    public modalService: BsModalService,
-    public router: Router,
-    public loginService: LoginService,
-    ) {
 
-
-  }
+  listaVacinas: any[]
+  vacinasEmAtrasoUsuario: boolean = false;
+  vacinasEmAtrasoDependente: boolean = false;
+  listaVacinasUsuario: any[];
+  listaVacinasDependente: any[];
+  listaDependente: any[];
   public emailConfirmacao: string;
   public usuario: string;
   public senha: string;
   modal: BsModalRef;
   private usuarioBusca: any;
 
+  constructor( @Inject(SESSION_STORAGE)
+  public storage: StorageService,
+    public modalService: BsModalService,
+    private vacinaService: VacinaService,
+    public router: Router,
+    public loginService: LoginService,
+  ) {
+    moment.locale('pt-BR');
+    this.listaVacinasDependente = [];
+    this.listaDependente = [];
+    this.listaVacinasUsuario = [];
+    this.listaVacinas = [];
+    this.listaVacinas = this.vacinaService.getVacinas();
 
+  }
 
   openModal(content: any) {
 
@@ -75,6 +89,7 @@ export class LoginComponent {
       if (this.usuarioBusca.senha == this.senha) {
 
         this.storage.set(StorageKeys.userId, this.usuarioBusca._id);
+        this.consultarVacinasUsuario(this.usuarioBusca._id);
         this.router.navigate(['home']);
       } else {
         alert("Senha inválida!");
@@ -85,5 +100,24 @@ export class LoginComponent {
   }
   registrar() {
     this.router.navigate(['register']);
+  }
+
+  consultarVacinasUsuario(id) {
+    this.listaVacinasUsuario = this.vacinaService.getCartaoVacina(id);
+    this.listaVacinas.forEach(v => {
+      var result = this.listaVacinasUsuario.find(function (vs) {
+        return vs.cod == v.cod;
+      });
+      if (this.vacinasEmAtrasoUsuario == false) {
+        if (result == undefined) {
+          this.vacinasEmAtrasoUsuario = true;
+          alert("Você possui vacinas em atraso. Procure o posto de saúde para colocar a vacinação em dia.");
+        }
+      }
+    });
+  }
+
+  consultarVacinasDependentes() {
+
   }
 }

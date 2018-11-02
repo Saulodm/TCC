@@ -195,22 +195,66 @@ app.post("/Usuario/Register", function (req, res) {
 app.post("/Vacinas/Register", function (req, res) {
   var VacinaCartao = mongoose.model("VacinaCartao", vacinaCartaoSchema);
   var body = req.body;
-  var vacinaCartao = new VacinaCartao({
-    idPaciente: body.idpaciente,
-    cod: body.cod,
-    nome: body.nome,
-    data: body.data,
-    lote: body.lote,
-    dose: body.dose
-  });
-  vacinaCartao.save(function (err, document) {
-    if (err)
-      console.log(err);
-    else
-      console.log("saved");
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.send(document);
-  });
+  var vacinaRepetida;
+  VacinaCartao.find({ idPaciente: body.idpaciente }, function (err, result) {
+
+    var cartaoCadastrado = result;
+    if (cartaoCadastrado.length > 0) {
+      cartaoCadastrado.forEach(function (element) {
+        if (element.nome == body.nome) {
+          vacinaRepetida = element;
+        }
+      }, this);
+    }
+
+    if (vacinaRepetida) {
+      var vacinaCartao = new VacinaCartao({
+        idPaciente: body.idpaciente,
+        cod: body.cod,
+        nome: body.nome,
+        data: body.data,
+        lote: body.lote,
+        dose: body.dose
+      });
+      VacinaCartao.findByIdAndDelete({ _id: vacinaRepetida._id }, function (err, result) {
+        if (err)
+          console.log(err);
+        var vacinaCartao = new VacinaCartao({
+          idPaciente: body.idpaciente,
+          cod: body.cod,
+          nome: body.nome,
+          data: body.data,
+          lote: body.lote,
+          dose: body.dose
+        });
+        vacinaCartao.save(function (err, document) {
+          if (err)
+            console.log(err);
+          else
+            console.log("saved");
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.send(document);
+        });
+      });
+    } else {
+      var vacinaCartao = new VacinaCartao({
+        idPaciente: body.idpaciente,
+        cod: body.cod,
+        nome: body.nome,
+        data: body.data,
+        lote: body.lote,
+        dose: body.dose
+      });
+      vacinaCartao.save(function (err, document) {
+        if (err)
+          console.log(err);
+        else
+          console.log("saved");
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send(document);
+      });
+    }
+  })
 })
 
 app.post("/Dependente/Register", function (req, res) {
@@ -249,7 +293,7 @@ app.get("/Vacinas/Consulta/:id", function (req, res) {
   VacinaCartao.find({ idPaciente: req.params.id }, function (err, result) {
     if (err)
       console.log(err);
-    console.log(result);
+    // console.log(result);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.end(JSON.stringify(result));
   });
@@ -334,7 +378,7 @@ app.post("/Noticia/Register", function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(document);
   });
-  
+
 })
 app.get("/Noticias/", function (req, res) {
   var Noticia = mongoose.model("Noticia", noticiaSchema);
@@ -442,35 +486,35 @@ app.get("/CreateUsers/", function (req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.end(JSON.stringify("Created"));
 });
-// app.get("/CreateVacinas/", function (req, res) {
-//   console.log("connected");
-//   var Vacina = mongoose.model("Vacina", vacinaSchema);
-//   var model = null;
-//   var ods = './Base de Vacinas.ods';
+app.get("/CreateVacinas/", function (req, res) {
+  console.log("connected");
+  var Vacina = mongoose.model("Vacina", vacinaSchema);
+  var model = null;
+  var ods = './Base de Vacinas.ods';
 
-//   mongoxlsx.xlsx2MongoData(ods, model, function (err, data) {
-//     console.log('start');
-//     console.log(data);
-//     data.forEach(function (element) {
-//       var vacina = new Vacina({
-//         cod: element.Cod,
-//         nome: element.Nome,
-//         idade: element.Idade,
-//         tipoIdade: element.TipoIdade,
-//         doses: element.Doses
-//       });
+  mongoxlsx.xlsx2MongoData(ods, model, function (err, data) {
+    console.log('start');
+    console.log(data);
+    data.forEach(function (element) {
+      var vacina = new Vacina({
+        cod: element.Cod,
+        nome: element.Nome,
+        idade: element.Idade,
+        tipoIdade: element.TipoIdade,
+        doses: element.Doses
+      });
 
-//       vacina.save(function (err) {
-//         if (err)
-//           return handleError(err);
-//         console.log("saved");
+      vacina.save(function (err) {
+        if (err)
+          return handleError(err);
+        console.log("saved");
 
-//       })
-//     }, this);
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.end(JSON.stringify("Created"));
-//   });
-// });
+      })
+    }, this);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify("Created"));
+  });
+});
 
 var server = app.listen(3000, function () {
   var host = server.address().address

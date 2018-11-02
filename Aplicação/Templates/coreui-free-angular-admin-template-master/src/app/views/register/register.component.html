@@ -45,52 +45,53 @@
                 <p class="text-muted">Dados pessoais</p>
                 <div class="input-group mb-3">
 
-                  <input type="text" [(ngModel)]="usuario.nome" name="nome" class="form-control" placeholder="Nome" autocomplete="nome" required>
+                  <input type="text" [(ngModel)]="usuario.nome" name="nome" class="form-control" placeholder="Nome" autocomplete="nome" required
+                    [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="input-group mb-3">
 
                   <input type="text" [(ngModel)]="usuario.sobrenome" name="sobrenome" class="form-control" placeholder="Sobrenome" autocomplete="sobrenome"
-                    required>
+                    required [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="input-group mb-3">
 
                   <input type="text" [(ngModel)]="usuario.cpf" name="cpf" (ngModelChange)="CPFMask()" class="form-control" placeholder="CPF"
-                    autocomplete="CPF" required>
+                    autocomplete="CPF" required [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="mb-3">
                   <p class="text-muted">Data de Nascimento:</p>
 
-                  <input type="date" class="form-control" [(ngModel)]="usuario.datanascimento" placeholder="Data de nascimento">
+                  <input type="date" class="form-control" [(ngModel)]="usuario.datanascimento" placeholder="Data de nascimento" [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="input-group mb-3">
 
                   <input type="text" [(ngModel)]="usuario.celular" name="celular" (ngModelChange)="TelefoneMask()" class="form-control" placeholder="Celular"
-                    autocomplete="celular" required>
+                    autocomplete="celular" required [ngModelOptions]="{standalone: true}">
                 </div>
                 <p class="text-muted">Endereço</p>
                 <div class="input-group mb-3">
 
                   <input type="text" [(ngModel)]="usuario.endereco.rua" name="rua" class="form-control" placeholder="Rua" autocomplete="rua"
-                    required>
+                    required [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="input-group mb-3">
 
                   <input type="text" [(ngModel)]="usuario.endereco.bairro" name="bairro" class="form-control" placeholder="Bairro" autocomplete="bairro"
-                    required>
+                    required [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="input-group mb-3">
 
                   <input type="number" [(ngModel)]="usuario.endereco.numero" name="numero" class="form-control" placeholder="Número" autocomplete="numero"
-                    required>
+                    required [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="input-group mb-3">
 
                   <input type="text" [(ngModel)]="usuario.endereco.complemento" name="complemento" class="form-control" placeholder="Complemento"
-                    autocomplete="complemento" required>
+                    autocomplete="complemento" required [ngModelOptions]="{standalone: true}">
                 </div>
-                <select [(ngModel)]="usuario.endereco.regiao" class="form-control" [ngModelOptions]="{standalone: true}">                  
+                <!-- <select [(ngModel)]="usuario.endereco.regiao" class="form-control" [ngModelOptions]="{standalone: true}">                  
                   <option *ngFor="let c of Regioes" [ngValue]="c">{{c.nome}}</option>
-                </select>
+                </select> -->
                 <br/>
                 <button type="button" (click)="Registrar()" class="btn btn-block btn-success">Registrar-se</button>
               </form>

@@ -1,19 +1,27 @@
+import { StorageKeys } from './../../../shared/storage-keys';
+import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
+import { DependenteService } from './../../services/dependente.service';
+import { VacinaService } from './../../services/vacina.service';
 import { element } from 'protractor';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoticiaService } from './../../services/noticia.service';
 import { NoticiaViewModel } from './../../viewModels/noticiaViewModel';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { BsModalRef, ModalOptions, BsModalService } from 'ngx-bootstrap/modal';
 import * as ngxbootstrap from 'ngx-bootstrap'
+import * as moment from 'moment'
+import 'moment/locale/pt-br';
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
-export class DashboardComponent {
-  listaNoticias: any[];
+export class DashboardComponent implements OnInit {
+ 
+  idUsuario
+  listaNoticias: any[]; 
   noticia1: NoticiaViewModel;
   noticia2: NoticiaViewModel;
   noticia3: NoticiaViewModel;
@@ -26,16 +34,29 @@ export class DashboardComponent {
   visibleNoticia4: boolean = false;
   visibleNoticia5: boolean = false;
   visibleNoticia6: boolean = false;
-  constructor(private noticiaService: NoticiaService) {
-    this.listaNoticias = [];
+  constructor(
+    @Inject(SESSION_STORAGE)
+    public storage: StorageService,
+    private noticiaService: NoticiaService,
+    private vacinaService: VacinaService,
+    private dependenteService: DependenteService) {
+    moment.locale('pt-BR');
+
+    this.listaNoticias = [];    
     this.noticia1 = new NoticiaViewModel();
     this.noticia2 = new NoticiaViewModel();
     this.noticia3 = new NoticiaViewModel();
     this.noticia4 = new NoticiaViewModel();
     this.noticia5 = new NoticiaViewModel();
     this.noticia6 = new NoticiaViewModel();
+    this.idUsuario = this.storage.get(StorageKeys.userId);
     this.consutarNoticias();
+   
   }
+  ngOnInit(): void {
+   
+  }
+
   consutarNoticias() {
     this.listaNoticias = []
     var result = this.noticiaService.getNoticias();
@@ -87,5 +108,7 @@ export class DashboardComponent {
 
     }
   }
+  
+
 
 }

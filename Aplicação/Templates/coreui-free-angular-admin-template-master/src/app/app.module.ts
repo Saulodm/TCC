@@ -11,6 +11,7 @@ import * as ngxbootstrap from 'ngx-bootstrap'
 import { FormsModule } from '@angular/forms';
 
 
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
