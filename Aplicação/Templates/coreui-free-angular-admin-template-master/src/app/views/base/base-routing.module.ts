@@ -28,7 +28,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'forms',
+        path: 'noticias',
         component: FormsComponent,
         data: {
           title: 'Forms'

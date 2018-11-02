@@ -1,41 +1,74 @@
 <div class="animated fadeIn">
   <div class="row">
-    <div class="card col-md-6 mt-5 mr-0">
+    <div *ngIf="visibleNoticia1" class="card col-md-6 mt-5 mr-0">
       <div class="card-body">
-        <h1>Vacinação - Anote na agenda</h1>
-        <img class="imgNoticia" src="../../../assets/vacinação.jpg" />
-      </div>
-      <div class="card-footer clicavel">
-        <div>Crianças de 2 até 5 anos serão vacinadas neste sábado 29/09. Traga seu filho!</div>
+        <h1>{{noticia1.titulo}}</h1>
+        <br/>
+        <h4>{{noticia1.manchete}}</h4>
+        <br/>
+        <span>
+          {{noticia1.texto}}
+        </span>
       </div>
     </div>
-    <div class="card col-md-6 mt-5">
+    <div *ngIf="visibleNoticia2" class="card col-md-6 mt-5">
       <div class="card-body">
-        <h1>De olho no prato</h1>
-        <img class="imgNoticia" src="../../../assets/alimentacaoSaudavel.jpg" />
-      </div>
-      <div class="card-footer clicavel" (click)="mostraAlert();">
-        <div>Você saberia dizer se está se alimentando de forma saudável?</div>
+        <h1>{{noticia2.titulo}}</h1>
+        <br/>
+        <h4>{{noticia2.manchete}}</h4>
+        <br/>
+        <span>
+            {{noticia2.texto}}
+        </span>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="card col-md-6 mt-3 mr-0">
+    <div *ngIf="visibleNoticia3" class="card col-md-6 mt-3 mr-0">
       <div class="card-body">
-        <h1>Será que é gripe?</h1>
-        <img class="imgNoticia" src="../../../assets/gripe.jpg" />
-      </div>
-      <div class="card-footer clicavel">
-        <div>Saiba como diferenciar gripe de resfriado, e as principais formas de prevenção. </div>
+        <h1>{{noticia3.titulo}}</h1>
+        <br/>
+        <h4>{{noticia3.manchete}}</h4>
+        <br/>
+        <span>
+              {{noticia3.texto}}
+        </span>
       </div>
     </div>
-    <div class="card col-md-6 mt-3">
+    <div *ngIf="visibleNoticia4" class="card col-md-6 mt-3">
       <div class="card-body">
-        <h1>Corpo em movimento</h1>
-        <img class="imgNoticia" src="../../../assets/atividadeFisica.png" />
+        <h1>{{noticia4.titulo}}</h1>
+        <br/>
+        <h4>{{noticia4.manchete}}</h4>
+        <br/>
+        <span>
+          {{noticia4.texto}}
+        </span>
       </div>
-      <div class="card-footer clicavel">
-        <div>O corpo humano precisa se movimentar, até mesmo na melhor idade</div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div *ngIf="visibleNoticia5" class="card col-md-6 mt-3 mr-0">
+      <div class="card-body">
+        <h1>{{noticia5.titulo}}</h1>
+        <br/>
+        <h4>{{noticia5.manchete}}</h4>
+        <br/>
+        <span>
+          {{noticia5.texto}}
+        </span>
+      </div>
+    </div>
+    <div *ngIf="visibleNoticia6" class="card col-md-6 mt-3 ">
+      <div class="card-body">
+        <h1>{{noticia6.titulo}}</h1>
+        <br/>
+        <h4>{{noticia6.manchete}}</h4>
+        <br/>
+        <span>
+          {{noticia6.texto}}
+        </span>
       </div>
     </div>
   </div>

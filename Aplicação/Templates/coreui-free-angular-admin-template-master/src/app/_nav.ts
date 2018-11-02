@@ -45,15 +45,15 @@ export const navItems = [
     perfil: 1
   },
   {
-    name: 'Hospitais',
-    url: '/buttons',
-    icon: 'fa fa-heartbeat',
-    perfil: 1
-  },
-  {
     name: 'Cadastrar Médico',
     url: '/base/medicos',
-    icon: 'fa fa-heartbeat',
+    icon: 'fa fa-user-md',
+    perfil: 3
+  },
+  {
+    name: 'Notícias',
+    url: '/base/noticias',
+    icon: 'fa fa-newspaper-o',
     perfil: 3
   },
   {
