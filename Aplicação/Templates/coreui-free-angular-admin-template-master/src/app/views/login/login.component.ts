@@ -1,3 +1,4 @@
+import { DependenteService } from './../../services/dependente.service';
 import { VacinaService } from './../../services/vacina.service';
 import { StorageKeys } from './../../../shared/storage-keys';
 import { LoginService } from './../../services/login.service';
@@ -35,6 +36,7 @@ export class LoginComponent {
   public storage: StorageService,
     public modalService: BsModalService,
     private vacinaService: VacinaService,
+    private dependenteService: DependenteService,
     public router: Router,
     public loginService: LoginService,
   ) {
@@ -90,6 +92,7 @@ export class LoginComponent {
 
         this.storage.set(StorageKeys.userId, this.usuarioBusca._id);
         this.consultarVacinasUsuario(this.usuarioBusca._id);
+        this.consultarVacinasDependentes(this.usuarioBusca._id);
         this.router.navigate(['home']);
       } else {
         alert("Senha inválida!");
@@ -117,7 +120,25 @@ export class LoginComponent {
     });
   }
 
-  consultarVacinasDependentes() {
-
+  consultarVacinasDependentes(id) {
+    this.listaDependente = this.dependenteService.getDependentes(id) as Array<any>;
+    if (this.listaDependente.length > 0) {
+      this.listaDependente.forEach(dp => {
+        this.listaVacinasDependente = this.vacinaService.getCartaoVacina(dp._id);
+        this.listaVacinas.forEach(v => {
+          var result = this.listaVacinasDependente.find(function (vd) {
+            return vd.cod == v.cod;
+          });
+          if (this.vacinasEmAtrasoDependente == false) {
+            var nascimento = moment(dp.datanascimento);
+            var now = moment();
+            if (result == undefined && now.subtract(v.idade, 'months') >= nascimento) {
+              this.vacinasEmAtrasoDependente = true;
+              alert("Seus dependentes possuem vacinas em atraso. Procure o posto de saúde para colocar a vacinação em dia.");
+            }
+          }
+        });
+      });
+    }
   }
 }

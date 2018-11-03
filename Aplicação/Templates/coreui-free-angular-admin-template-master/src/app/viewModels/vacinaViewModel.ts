@@ -3,4 +3,9 @@ export class VacinaViewModel{
     public Data: string;
     public Lote: string;
     public Dose: number;
+    public EmAtraso: boolean;
+
+    constructor(){
+        this.EmAtraso = true;
+    }
 }

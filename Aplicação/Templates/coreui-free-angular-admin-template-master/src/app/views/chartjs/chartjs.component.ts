@@ -7,6 +7,8 @@ import { VacinaCartaoViewModel } from './../../viewModels/vacinaCartaoViewModel'
 import { VacinaService } from './../../services/vacina.service';
 import { Component, Inject } from '@angular/core';
 import { VacinaViewModel } from '../../viewModels/vacinaViewModel';
+import * as moment from 'moment'
+import 'moment/locale/pt-br';
 
 @Component({
   templateUrl: 'chartjs.component.html'
@@ -40,6 +42,7 @@ export class ChartJSComponent {
     private vacinaService: VacinaService,
     private usuarioService: UsuarioService,
     private dependenteService: DependenteService) {
+    moment.locale('pt-BR');
     this.vacinaCadastro = new VacinaCartaoViewModel();
     this.dependenteSelecionado = null;
     this.vacinaSelecionada = null;
@@ -91,75 +94,195 @@ export class ChartJSComponent {
       this.nomePaciente = paciente.nome.trim() + " " + paciente.sobrenome.trim();
     } else {
       var result = this.vacinaService.getCartaoVacina(this.dependenteSelecionado._id);
+      this.nomePaciente = this.dependenteSelecionado.nome;
       result.forEach(vc => {
         vc.lote = vc.lote.toUpperCase();
         vc.data = Util.FormataData(vc.data);
         this.listaVacinasPaciente.push(vc);
-      });
-      this.usuarioService.getUsuario("");
+      });     
     }
     if (this.listaVacinasPaciente.length > 0) {
-      this.listaVacinasPaciente.forEach(vc => {
+      this.listaVacinas.forEach(vc => {
         switch (vc.cod) {
           case 1:
-            this.AntimeningococicaCConjugada.Nome = vc.nome;
-            this.AntimeningococicaCConjugada.Lote = vc.lote;
-            this.AntimeningococicaCConjugada.Data = vc.data;
-            this.AntimeningococicaCConjugada.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.AntimeningococicaCConjugada.Nome = vcp.nome;
+              this.AntimeningococicaCConjugada.Lote = vcp.lote;
+              this.AntimeningococicaCConjugada.Data = vcp.data;
+              this.AntimeningococicaCConjugada.Dose = vcp.dose;
+            } else {
+              this.AntimeningococicaCConjugada.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.AntimeningococicaCConjugada.EmAtraso = vcp == undefined;
+            else {
+              this.AntimeningococicaCConjugada.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
           case 2:
-            this.Antipneumococica10ValenteConjugada.Nome = vc.nome;
-            this.Antipneumococica10ValenteConjugada.Lote = vc.lote;
-            this.Antipneumococica10ValenteConjugada.Data = vc.data;
-            this.Antipneumococica10ValenteConjugada.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.Antipneumococica10ValenteConjugada.Nome = vcp.nome;
+              this.Antipneumococica10ValenteConjugada.Lote = vcp.lote;
+              this.Antipneumococica10ValenteConjugada.Data = vcp.data;
+              this.Antipneumococica10ValenteConjugada.Dose = vcp.dose;
+            } else {
+              this.Antipneumococica10ValenteConjugada.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.Antipneumococica10ValenteConjugada.EmAtraso = vcp == undefined;
+            else {
+              this.Antipneumococica10ValenteConjugada.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
           case 3:
-            this.BCGID.Nome = vc.nome;
-            this.BCGID.Lote = vc.lote;
-            this.BCGID.Data = vc.data;
-            this.BCGID.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.BCGID.Nome = vcp.nome;
+              this.BCGID.Lote = vcp.lote;
+              this.BCGID.Data = vcp.data;
+              this.BCGID.Dose = vcp.dose;
+            } else {
+              this.BCGID.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.BCGID.EmAtraso = vcp == undefined;
+            else {
+              this.BCGID.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
           case 4:
-            this.DTP.Nome = vc.nome;
-            this.DTP.Lote = vc.lote;
-            this.DTP.Data = vc.data;
-            this.DTP.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.DTP.Nome = vcp.nome;
+              this.DTP.Lote = vcp.lote;
+              this.DTP.Data = vcp.data;
+              this.DTP.Dose = vcp.dose;
+            } else {
+              this.DTP.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.DTP.EmAtraso = vcp == undefined;
+            else {
+              this.DTP.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
           case 5:
-            this.FebreAmarela.Nome = vc.nome;
-            this.FebreAmarela.Lote = vc.lote;
-            this.FebreAmarela.Data = vc.data;
-            this.FebreAmarela.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.FebreAmarela.Nome = vcp.nome;
+              this.FebreAmarela.Lote = vcp.lote;
+              this.FebreAmarela.Data = vcp.data;
+              this.FebreAmarela.Dose = vcp.dose;
+            } else {
+              this.FebreAmarela.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.FebreAmarela.EmAtraso = vcp == undefined;
+            else {
+              this.FebreAmarela.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
           case 6:
-            this.HepatitieB.Nome = vc.nome;
-            this.HepatitieB.Lote = vc.lote;
-            this.HepatitieB.Data = vc.data;
-            this.HepatitieB.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.HepatitieB.Nome = vcp.nome;
+              this.HepatitieB.Lote = vcp.lote;
+              this.HepatitieB.Data = vcp.data;
+              this.HepatitieB.Dose = vcp.dose;
+            } else {
+              this.HepatitieB.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.HepatitieB.EmAtraso = vcp == undefined;
+            else {
+              this.HepatitieB.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
           case 7:
-            this.SRC.Nome = vc.nome;
-            this.SRC.Lote = vc.lote;
-            this.SRC.Data = vc.data;
-            this.SRC.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.SRC.Nome = vcp.nome;
+              this.SRC.Lote = vcp.lote;
+              this.SRC.Data = vcp.data;
+              this.SRC.Dose = vcp.dose;
+            } else {
+              this.SRC.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.SRC.EmAtraso = vcp == undefined;
+            else {
+              this.SRC.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
           case 8:
-            this.Tetravalente.Nome = vc.nome;
-            this.Tetravalente.Lote = vc.lote;
-            this.Tetravalente.Data = vc.data;
-            this.Tetravalente.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.Tetravalente.Nome = vcp.nome;
+              this.Tetravalente.Lote = vcp.lote;
+              this.Tetravalente.Data = vcp.data;
+              this.Tetravalente.Dose = vcp.dose;
+            } else {
+              this.Tetravalente.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.Tetravalente.EmAtraso = vcp == undefined;
+            else {
+              this.Tetravalente.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
           case 9:
-            this.VOP.Nome = vc.nome;
-            this.VOP.Lote = vc.lote;
-            this.VOP.Data = vc.data;
-            this.VOP.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.VOP.Nome = vcp.nome;
+              this.VOP.Lote = vcp.lote;
+              this.VOP.Data = vcp.data;
+              this.VOP.Dose = vcp.dose;
+            } else {
+              this.VOP.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.VOP.EmAtraso = vcp == undefined;
+            else {
+              this.VOP.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
           case 10:
-            this.VORH.Nome = vc.nome;
-            this.VORH.Lote = vc.lote;
-            this.VORH.Data = vc.data;
-            this.VORH.Dose = vc.dose;
+            var vcp = this.listaVacinasPaciente.find(function (vs) {
+              return vs.cod == vc.cod;
+            });
+            if (vcp) {
+              this.VORH.Nome = vcp.nome;
+              this.VORH.Lote = vcp.lote;
+              this.VORH.Data = vcp.data;
+              this.VORH.Dose = vcp.dose;
+            } else {
+              this.VORH.Nome = vc.nome;
+            }
+            if (this.pesquisaEuMesmo)
+              this.VORH.EmAtraso = vcp == undefined;
+            else {
+              this.VORH.EmAtraso = this.validaVacinaDeveSerTomada(vc, vcp == undefined);
+            }
             break;
         }
 
@@ -214,9 +337,18 @@ export class ChartJSComponent {
     this.VOP = new VacinaViewModel();
     this.VORH = new VacinaViewModel();
   }
-  deletarVacina(id: string){
+  deletarVacina(id: string) {
     this.vacinaService.deletarCartaoVacina(id);
-    alert("Vacina removida");    
+    alert("Vacina removida");
     this.consultar();
+  }
+  validaVacinaDeveSerTomada(vacina: any, naopossui: boolean): boolean {
+    var nascimento = moment(this.dependenteSelecionado.datanascimento);
+    var now = moment();
+    if (naopossui == true && now.subtract(vacina.idade, 'months') >= nascimento) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -38,8 +38,7 @@ export class DashboardComponent implements OnInit {
     @Inject(SESSION_STORAGE)
     public storage: StorageService,
     private noticiaService: NoticiaService,
-    private vacinaService: VacinaService,
-    private dependenteService: DependenteService) {
+   ) {
     moment.locale('pt-BR');
 
     this.listaNoticias = [];    
