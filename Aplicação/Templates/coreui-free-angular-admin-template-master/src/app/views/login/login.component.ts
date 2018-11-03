@@ -91,8 +91,11 @@ export class LoginComponent {
       if (this.usuarioBusca.senha == this.senha) {
 
         this.storage.set(StorageKeys.userId, this.usuarioBusca._id);
-        this.consultarVacinasUsuario(this.usuarioBusca._id);
-        this.consultarVacinasDependentes(this.usuarioBusca._id);
+        if(this.usuarioBusca.perfil == 1){
+
+          this.consultarVacinasUsuario(this.usuarioBusca._id);
+          this.consultarVacinasDependentes(this.usuarioBusca._id);
+        }
         this.router.navigate(['home']);
       } else {
         alert("Senha inválida!");
