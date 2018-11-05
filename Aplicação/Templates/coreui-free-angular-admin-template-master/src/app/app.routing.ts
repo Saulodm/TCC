@@ -61,11 +61,11 @@ export const routes: Routes = [
         loadChildren: './views/notifications/notifications.module#NotificationsModule'
       },
       {
-        path: 'theme',
+        path: 'acessoMedico',
         loadChildren: './views/theme/theme.module#ThemeModule'
       },
       {
-        path: 'widgets',
+        path: 'acessoPaciente',
         loadChildren: './views/widgets/widgets.module#WidgetsModule'
       }
     ]

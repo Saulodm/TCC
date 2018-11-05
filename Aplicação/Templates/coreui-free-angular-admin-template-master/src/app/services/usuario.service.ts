@@ -32,4 +32,11 @@ export class UsuarioService {
     })
     return result;
   }
+  getAll(perfil) {
+    var result;
+    this.baseService.httpGet("Usuario/All/" + perfil, res => {
+      result = JSON.parse(res);
+    })
+    return result;
+  }
 }

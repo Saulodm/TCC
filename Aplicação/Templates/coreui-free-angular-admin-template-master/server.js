@@ -87,6 +87,16 @@ var noticiaSchema = new Schema({
   texto: String,
   imagem: Object
 });
+//tipoAcesso
+//1=solicitado
+//2=permitido
+//
+var acessoSchema = new Schema({
+  idmedico: String,
+  idpaciente: String,
+  nomepaciente: String,
+  tipoacesso: Number
+});
 mongoose.Promise = global.Promise;
 // mongoose.createConnection(url, {
 //   useMongoClient: true  
@@ -125,7 +135,17 @@ app.get("/Usuario/Consulta/:id", function (req, res) {
     res.end(JSON.stringify(result));
   });
 });
-
+app.get("/Usuario/All/:perfil", function (req, res) {
+  var User = mongoose.model("Usuario", usuarioSchema);
+  User.find({ perfil: req.params.perfil }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    console.log("ta chamando certo");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  });
+});
 
 app.get("/Usuario/Email/:email", function (req, res) {
   var User = mongoose.model("Usuario", usuarioSchema);
@@ -422,6 +442,59 @@ app.delete("/Medico/:id", function (req, res) {
     res.end(JSON.stringify(result));
   })
 })
+
+app.post("/Acesso/Register", function (req, res) {
+  var Acesso = mongoose.model("Acesso", acessoSchema);
+
+  var body = req.body;
+  console.log(body);
+  var acesso = new Acesso({
+    idmedico: body.idmedico,
+    idpaciente: body.idpaciente,
+    nomepaciente: body.nomepaciente,
+    tipoacesso: body.tipoacesso
+  });
+  acesso.save(function (err, document) {
+    if (err)
+      console.log(err);
+    console.log("saved");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(document);
+  });
+
+})
+app.get("/Acesso/Medico/:id", function (req, res) {
+  var Acesso = mongoose.model("Acesso", acessoSchema);
+  Acesso.find({ idmedico: req.params.id }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  });
+});
+app.get("/Acesso/Paciente/:id", function (req, res) {
+  var Acesso = mongoose.model("Acesso", acessoSchema);
+  Acesso.find({ idpaciente: req.params.id }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  });
+});
+app.delete("/Acesso/:id", function (req, res) {
+  var Acesso = mongoose.model("Acesso", acessoSchema);
+  Acesso.findByIdAndDelete({ _id: req.params.id }, function (err, result) {
+    if (err)
+      console.log(err);
+    console.log(result);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.end(JSON.stringify(result));
+  })
+})
+
+
 //função que cria a tabela no banco. A tabela é criada a partir de um arquivo xls. 
 app.get("/CreatePostos/", function (req, res) {
   console.log("connected");

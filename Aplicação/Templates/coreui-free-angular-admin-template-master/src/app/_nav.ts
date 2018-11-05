@@ -57,6 +57,18 @@ export const navItems = [
     perfil: 3
   },
   {
+    name: 'Acesso Paciente',
+    url: '/acessoPaciente',
+    icon: 'fa fa-user-o',
+    perfil: 2
+  },
+  {
+    name: 'Acesso Médico',
+    url: '/acessoMedico',
+    icon: 'fa fa-user-md',
+    perfil: 1
+  },
+  {
     divider: true
   }
 

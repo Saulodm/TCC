@@ -7,25 +7,10 @@ import { TypographyComponent } from './typography.component';
 const routes: Routes = [
   {
     path: '',
+    component: ColorsComponent,
     data: {
-      title: 'Theme'
-    },
-    children: [
-      {
-        path: 'colors',
-        component: ColorsComponent,
-        data: {
-          title: 'Colors'
-        }
-      },
-      {
-        path: 'typography',
-        component: TypographyComponent,
-        data: {
-          title: 'Typography'
-        }
-      }
-    ]
+      title: 'Colors'
+    }   
   }
 ];
 
