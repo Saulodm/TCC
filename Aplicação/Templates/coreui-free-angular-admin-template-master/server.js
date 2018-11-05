@@ -95,6 +95,7 @@ var acessoSchema = new Schema({
   idmedico: String,
   idpaciente: String,
   nomepaciente: String,
+  nomemedico: String,
   tipoacesso: Number
 });
 mongoose.Promise = global.Promise;
@@ -452,6 +453,7 @@ app.post("/Acesso/Register", function (req, res) {
     idmedico: body.idmedico,
     idpaciente: body.idpaciente,
     nomepaciente: body.nomepaciente,
+    nomemedico: body.nomemedico,
     tipoacesso: body.tipoacesso
   });
   acesso.save(function (err, document) {
@@ -462,6 +464,20 @@ app.post("/Acesso/Register", function (req, res) {
     res.send(document);
   });
 
+})
+app.post("/Acesso/Update", function (req, res) {
+  var Acesso = mongoose.model("Acesso", acessoSchema);
+
+  var body = req.body;
+  console.log(body);
+  
+  Acesso.findOneAndUpdate({ _id: body._id }, body, function (err, document) {
+    if (err)
+      console.log(err);
+    console.log("saved");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(document);
+  });
 })
 app.get("/Acesso/Medico/:id", function (req, res) {
   var Acesso = mongoose.model("Acesso", acessoSchema);

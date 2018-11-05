@@ -31,4 +31,19 @@ export class AcessoService {
     })
     return result;
   }
+  getAcessosPaciente(id: string) {
+    var result;
+    this.baseService.httpGet("Acesso/Paciente/" + id, res => {
+      result = JSON.parse(res);
+    })
+    return result;
+  }
+  updateAcesso(acesso: AcessoViewModel) {
+    var post = JSON.stringify(acesso);
+    var result = null
+    this.baseService.httpPost("Acesso/Update", post, res => {
+      result = JSON.parse(res);
+    })
+    return result;
+  }
 }

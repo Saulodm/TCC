@@ -31,9 +31,11 @@ export class WidgetsComponent {
   solicitar() {
 
     var acesso = new AcessoViewModel();
-    acesso.idmedico = this.storage.get(StorageKeys.userId);
+    var med = this.usuarioService.getUsuario(this.storage.get(StorageKeys.userId))[0];
+    acesso.idmedico = med._id
     acesso.idpaciente = this.usuarioSelecionado._id;
     acesso.nomepaciente = this.usuarioSelecionado.nome + " " + this.usuarioSelecionado.sobrenome;
+    acesso.nomemedico = med.nome + " " + med.sobrenome;
     acesso.tipoacesso = 1;
 
     this.acessoService.postAcessoMedico(acesso);

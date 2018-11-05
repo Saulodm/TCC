@@ -47,11 +47,14 @@
         <li *ngFor="let s of listaSolitacoes">
           <div class="row">
             <div class="col-8">
-              <label>Paciente: {{s.nomepaciente}} </label>             
+              <label>Paciente: {{s.nomepaciente}} </label>
+              <br/> 
+              <label *ngIf="s.tipoacesso == 1">Status: Solicitado </label>             
+              <label *ngIf="s.tipoacesso == 2">Status: Concedido </label>             
             </div>
             <div class="col-4" style="text-align:end;">
               
-              <button class="btn btn-danger" title="Remover" (click)="deletarSolicitacao(s._id)"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-danger" title="Excluir" (click)="deletarSolicitacao(s._id)"><i class="fa fa-trash"></i></button>
             </div>
           </div>
 
