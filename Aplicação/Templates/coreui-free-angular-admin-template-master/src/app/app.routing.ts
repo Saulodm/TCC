@@ -57,7 +57,7 @@ export const routes: Routes = [
         loadChildren: './views/icons/icons.module#IconsModule'
       },
       {
-        path: 'notifications',
+        path: 'consultaPaciente',
         loadChildren: './views/notifications/notifications.module#NotificationsModule'
       },
       {

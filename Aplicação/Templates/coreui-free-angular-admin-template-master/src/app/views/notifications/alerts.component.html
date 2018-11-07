@@ -1,182 +1,184 @@
 <div class="animated fadeIn">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Bootstrap Alerts</strong>
-          <div class="card-header-actions">
-            <a href="https://valor-software.com/ngx-bootstrap/#/alerts" target="_blank">
-              <small className="text-muted">docs</small>
-            </a>
-          </div>
-        </div>
-        <div class="card-body">
-          <alert type="success">
-            <strong>Well done!</strong> You successfully read this important alert message.
-          </alert>
-          <alert type="info">
-            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-          </alert>
-          <alert type="warning">
-            <strong>Warning!</strong> Better check yourself, you're not looking too good.
-          </alert>
-          <alert type="danger">
-            <strong>Oh snap!</strong> Change a few things up and try submitting again.
-          </alert>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Alerts</strong>
-          <small>link</small>
-        </div>
-        <div class="card-body">
-          <alert type="success">
-            <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
-          </alert>
-          <alert type="info">
-            <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
-          </alert>
-          <alert type="warning">
-            <strong>Warning!</strong> Better check yourself, you're <a href="#" class="alert-link">not looking too good</a>.
-          </alert>
-          <alert type="danger">
-            <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
-          </alert>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Alerts</strong> <small>additional content</small>
-        </div>
-        <div class="card-body">
-          <alert type="success">
-            <h4 class="alert-heading">Well done!</h4>
-            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-          </alert>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Alerts</strong> <small>dismissing</small>
-        </div>
-        <div class="card-body">
-          <div *ngFor="let alert of alerts">
-            <alert [type]="alert.type" [dismissible]="dismissible">{{ alert.msg }}</alert>
-          </div>
-          <button type="button" class="btn btn-primary" (click)="dismissible = !dismissible">Toggle dismissible</button>
-          <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Alerts</strong> <small>dynamic html</small>
-        </div>
-        <div class="card-body">
-          <div *ngFor="let alert of alertsHtml">
-            <alert [type]="alert.type"><span [innerHtml]="alert.msg"></span></alert>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Alerts</strong> <small>dynamic content</small>
-        </div>
-        <div class="card-body">
-          <alert type="success">{{messages[index]}}</alert>
+  <br />
 
-          <div *ngIf="index !== messages.length -1; else elseBlock">
-            <button class="btn btn-primary" (click)="changeText()">Change text</button>
+  <div class="col-12">
+    <div class="form-control" style="height:auto !important">
+      <div class="row">
+        <div class="col-6 form-group">
+          <div class="col-3">
+            <label>Paciente :</label>
           </div>
-          <ng-template #elseBlock>
-            <button class="btn btn-primary" (click)="index = 0">Reset</button>
-          </ng-template>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Alerts</strong> <small>dismiss on timeout</small>
-        </div>
-        <div class="card-body">
-          <alert type="success" dismissOnTimeout="5000">
-            <strong>Well done!</strong> You successfully read this important alert message.
-          </alert>
+          <div class="col-10">
+            <select [disabled]="listaPacientes.length == 0" [(ngModel)]="pacienteSelecionado" (ngModelChange)="getDependentes()" class="form-control"
+              [ngModelOptions]="{standalone: true}">
 
-          <p>If you missed alert on top of me, just press <code>Add more</code> button</p>
-          <div *ngFor="let alert of alertsDismiss">
-            <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+              <option selected [ngValue]="null">Selecione o paciente</option>
+              <option *ngFor="let p of listaPacientes" [ngValue]="p">{{p.nomepaciente}}</option>
+            </select>
           </div>
-          <button type="button" class="btn btn-primary" (click)="add()">Add more</button>
+
         </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Alerts</strong> <small>global styling</small>
-        </div>
-        <div class="card-body">
-          <style>
-            .alert-md-color {
-              background-color: #7B1FA2;
-              border-color: #4A148C;
-              color: #fff;
-            }
-          </style>
-          <alert type="md-color">
-            <strong>Well done!</strong> You successfully read this important alert message.
-          </alert>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Alerts</strong> <small>component level styling</small>
-        </div>
-        <div class="card-body">
-          <alert type="md-local">
-            <strong>Well done!</strong> You successfully read this important alert message.
-          </alert>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Alerts</strong> <small>configuring defaults</small>
-        </div>
-        <div class="card-body">
-          <alert>
-            <strong>Well done!</strong> You successfully read this important alert message.
-          </alert>
-          <alert type="info">
-            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-          </alert>
+        <div class="col-6 form-group">
+          <div *ngIf="listaDependentes.length > 0">
+            <div class="col-3">
+              <label>Dependente :</label>
+            </div>
+            <div class="col-10">
+              <select [(ngModel)]="dependenteSelecionado" class="form-control" [ngModelOptions]="{standalone: true}">
+
+                <option selected [ngValue]="null">Selecione o dependente</option>
+                <option *ngFor="let c of listaDependentes" [ngValue]="c">{{c.nome}}</option>
+              </select>
+            </div>
+          </div>
 
         </div>
       </div>
+      <div class="row">
+        <div class="col-12">
+
+          <div class="form-inline">
+            <div class="col-2">
+              <button class="btn btn-primary" [disabled]="pacienteSelecionado == undefined || pacienteSelecionado==null"
+                (click)="consultar()"> Consultar Cartão</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <br />
+  <div *ngIf="listaVacinasPaciente.length > 0" class="col-12">
+
+
+    <div class="card">
+      <div class="card-header">
+        Nome Paciente: {{nomePaciente}}
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <div class="column col-3" style="background-color:#aaa;">
+            <h5 *ngIf="AntimeningococicaCConjugada.EmAtraso == false"><strong>Nome:</strong>
+              {{AntimeningococicaCConjugada.Nome}} </h5>
+            <h5 *ngIf="AntimeningococicaCConjugada.EmAtraso == true" style="color:red;"><strong>Nome:</strong>
+              Antimeningocócica C conjugada </h5>
+            <h5><strong>Lote:</strong> {{AntimeningococicaCConjugada.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{AntimeningococicaCConjugada.Dose}}</h5>
+            <h5><strong>Data:</strong> {{AntimeningococicaCConjugada.Data}}</h5>
+          </div>
+          <div class="column col-3" style="background-color:#bbb;">
+            <h5 *ngIf="Antipneumococica10ValenteConjugada.EmAtraso == false"><strong>Nome:</strong>
+              {{Antipneumococica10ValenteConjugada.Nome}} </h5>
+            <h5 *ngIf="Antipneumococica10ValenteConjugada.EmAtraso == true" style="color:red;"><strong>Nome:</strong>
+              Antipneumocócica 10 valente conjugada</h5>
+            <h5><strong>Lote:</strong> {{Antipneumococica10ValenteConjugada.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{Antipneumococica10ValenteConjugada.Dose}}</h5>
+            <h5><strong>Data:</strong> {{Antipneumococica10ValenteConjugada.Data}}</h5>
+          </div>
+          <div class="column col-3" style="background-color:#aaa;">
+            <h5 *ngIf="BCGID.EmAtraso == false"><strong>Nome:</strong> {{BCGID.Nome}} </h5>
+            <h5 *ngIf="BCGID.EmAtraso == true" style="color:red;"><strong>Nome:</strong> BCG-ID </h5>
+            <h5><strong>Lote:</strong> {{BCGID.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{BCGID.Dose}}</h5>
+            <h5><strong>Data:</strong> {{BCGID.Data}}</h5>
+
+          </div>
+          <div class="column col-3" style="background-color:#bbb;">
+            <h5 *ngIf="DTP.EmAtraso == false"><strong>Nome:</strong> {{DTP.Nome}} </h5>
+            <h5 *ngIf="DTP.EmAtraso == true" style="color:red;"><strong>Nome:</strong> DTP(tríplice bacteriana) </h5>
+            <h5><strong>Lote:</strong> {{DTP.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{DTP.Dose}}</h5>
+            <h5><strong>Data:</strong> {{DTP.Data}}</h5>
+
+          </div>
+
+        </div>
+        <br />
+        <div class="row">
+          <div class="column col-3" style="background-color:#aaa;">
+            <h5 *ngIf="FebreAmarela.EmAtraso == false"><strong>Nome:</strong> {{FebreAmarela.Nome}} </h5>
+            <h5 *ngIf="FebreAmarela.EmAtraso == true" style="color:red;"><strong>Nome:</strong> Febre Amarela </h5>
+            <h5><strong>Lote:</strong> {{FebreAmarela.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{FebreAmarela.Dose}}</h5>
+            <h5><strong>Data:</strong> {{FebreAmarela.Data}}</h5>
+
+          </div>
+          <div class="column col-3" style="background-color:#bbb;">
+            <h5 *ngIf="HepatitieB.EmAtraso == false"><strong>Nome:</strong> {{HepatitieB.Nome}} </h5>
+            <h5 *ngIf="HepatitieB.EmAtraso == true" style="color:red;"><strong>Nome:</strong> Hepatitie B </h5>
+            <h5><strong>Lote:</strong> {{HepatitieB.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{HepatitieB.Dose}}</h5>
+            <h5><strong>Data:</strong> {{HepatitieB.Data}}</h5>
+
+          </div>
+          <div class="column col-3" style="background-color:#aaa;">
+            <h5 *ngIf="SRC.EmAtraso == false"><strong>Nome:</strong> {{SRC.Nome}} </h5>
+            <h5 *ngIf="SRC.EmAtraso == true" style="color:red;"><strong>Nome:</strong> SRC (tríplice viral, MMR) </h5>
+            <h5><strong>Lote:</strong> {{SRC.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{SRC.Dose}}</h5>
+            <h5><strong>Data:</strong> {{SRC.Data}}</h5>
+
+          </div>
+          <div class="column col-3" style="background-color:#bbb;">
+            <h5 *ngIf="Tetravalente.EmAtraso == false"><strong>Nome:</strong> {{Tetravalente.Nome}} </h5>
+            <h5 *ngIf="Tetravalente.EmAtraso == true" style="color:red;"><strong>Nome:</strong> Tetravalente (DTP +
+              Hib) </h5>
+            <h5><strong>Lote:</strong> {{Tetravalente.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{Tetravalente.Dose}}</h5>
+            <h5><strong>Data:</strong> {{Tetravalente.Data}}</h5>
+
+          </div>
+
+        </div>
+        <br />
+
+        <div class="row">
+          <div class="column col-3" style="background-color:#aaa;">
+            <h5 *ngIf="VOP.EmAtraso == false"><strong>Nome:</strong> {{VOP.Nome}} </h5>
+            <h5 *ngIf="VOP.EmAtraso == true" style="color:red;"><strong>Nome:</strong> VOP(vacina oral contra a
+              poliomelite - Sabin) </h5>
+            <h5><strong>Lote:</strong> {{VOP.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{VOP.Dose}}</h5>
+            <h5><strong>Data:</strong> {{VOP.Data}}</h5>
+
+          </div>
+          <div class="column col-3" style="background-color:#bbb;">
+            <h5 *ngIf="VORH.EmAtraso == false"><strong>Nome:</strong> {{VORH.Nome}} </h5>
+            <h5 *ngIf="VORH.EmAtraso == true" style="color:red;"><strong>Nome:</strong> VORH (vacina oral contra
+              rotavírus humano) </h5>
+            <h5><strong>Lote:</strong> {{VORH.Lote}}</h5>
+            <h5><strong>Dose:</strong> {{VORH.Dose}}</h5>
+            <h5><strong>Data:</strong> {{VORH.Data}}</h5>
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="listaVacinasPaciente.length == 0 && pesquisado" class="col-12">
+    <div class="form-control" style="height:auto !important;">
+      <div style="text-align: center; ">
+        <i class="fa fa-exclamation fa-lg mt-4"></i>
+      </div>
+      <div style="text-align: center; ">
+        <label><strong>Paciente não possui vacinas cadastradas.</strong></label>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="listaAcessoMedico.length == 0" class="col-12">
+    <div class="form-control" style="height:auto !important;">
+      <div style="text-align: center; ">
+        <i class="fa fa-exclamation fa-lg mt-4"></i>
+      </div>
+      <div style="text-align: center; ">
+        <label><strong>Não há pacientes disponíveis para consulta.</strong></label>
+      </div>
+    </div>
+  </div>
+  <br />
 </div>

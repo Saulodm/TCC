@@ -15,9 +15,11 @@ import { ModalsComponent } from './modals.component';
 // Notifications Routing
 import { NotificationsRoutingModule } from './notifications-routing.module';
 
+import { FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     NotificationsRoutingModule,
     AlertModule.forRoot(),
     ModalModule.forRoot()

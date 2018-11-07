@@ -13,14 +13,14 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'alerts',
+        path: 'vacinasPaciente',
         component: AlertsComponent,
         data: {
           title: 'Alerts'
         }
       },
       {
-        path: 'badges',
+        path: 'vacinasAtraso',
         component: BadgesComponent,
         data: {
           title: 'Badges'

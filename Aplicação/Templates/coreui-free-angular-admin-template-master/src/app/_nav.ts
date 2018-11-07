@@ -33,7 +33,14 @@ export const navItems = [
   },
   {
     name: 'Consultar Paciente',
-    url: '/icons',
+    url: '/consultaPaciente/vacinasPaciente',
+    icon: 'fa fa-file-text-o',
+    perfil: 2
+
+  },
+  {
+    name: 'Vacinas em Atraso',
+    url: '/consultaPaciente/vacinasAtraso',
     icon: 'fa fa-file-text-o',
     perfil: 2
 
