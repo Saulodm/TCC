@@ -66,8 +66,7 @@ var enderecoSchema = new Schema({
   rua: String,
   numero: Number,
   bairro: String,
-  complemento: String,
-  regiao: String,
+  complemento: String
 });
 
 var dependenteSchema = new Schema({
@@ -175,7 +174,7 @@ app.post("/Usuario/Register", function (req, res) {
   var Endereco = mongoose.model("Endereco", enderecoSchema);
   var body = req.body;
 
-
+  console.log(body);
 
   var endereco = new Endereco({
 
@@ -183,7 +182,7 @@ app.post("/Usuario/Register", function (req, res) {
     numero: body.endereco.numero,
     bairro: body.endereco.bairro,
     complemento: body.endereco.complemento,
-    regiao: body.endereco.regiao.nome,
+  
   });
   endereco.save(function (err, documentEnd) {
     if (err)

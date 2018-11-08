@@ -29,6 +29,7 @@ export class CarouselsComponent {
   cadastrar() {
     var result = this.dependenteService.postDependente(this.storage.get(StorageKeys.userId), this.dependente);
     alert("Cadastro Realizado");
+    this.dependente = new DependenteViewModel();
     this.consultaDependentes();
   }
   consultaDependentes() {
