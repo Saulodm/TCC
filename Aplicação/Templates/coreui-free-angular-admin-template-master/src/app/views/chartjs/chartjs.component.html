@@ -1,5 +1,5 @@
 <div class="animated fadeIn">
-  <br/>
+  <br />
 
   <div class="col-12">
     <div class="form-control" style="height:auto !important">
@@ -10,9 +10,10 @@
           </div>
           <div class="col-6">
             <label class="switch switch-3d switch-primary">
-            <input type="checkbox" [disabled]="listaDependentes.length == 0" [(ngModel)]="pesquisaEuMesmo" class="switch-input" checked>
-            <span class="switch-slider"></span>
-          </label>
+              <input type="checkbox" [disabled]="listaDependentes.length == 0" [(ngModel)]="pesquisaEuMesmo" class="switch-input"
+                checked>
+              <span class="switch-slider"></span>
+            </label>
           </div>
 
         </div>
@@ -21,11 +22,12 @@
             <label>Dependente :</label>
           </div>
           <div class="col-6">
-            <select [disabled]="pesquisaEuMesmo || listaDependentes.length == 0" [(ngModel)]="dependenteSelecionado" class="form-control" [ngModelOptions]="{standalone: true}">
-                  
-                  <option selected [ngValue]="null">Selecione o dependente</option>						
-                  <option *ngFor="let c of listaDependentes" [ngValue]="c">{{c.nome}}</option>
-                  </select>
+            <select [disabled]="pesquisaEuMesmo || listaDependentes.length == 0" [(ngModel)]="dependenteSelecionado"
+              class="form-control" [ngModelOptions]="{standalone: true}">
+
+              <option selected [ngValue]="null">Selecione o dependente</option>
+              <option *ngFor="let c of listaDependentes" [ngValue]="c">{{c.nome}}</option>
+            </select>
           </div>
 
         </div>
@@ -45,7 +47,7 @@
       </div>
     </div>
   </div>
-  <br/>
+  <br />
   <div *ngIf="isCadastrando" class="col-12" style="text-align: center; ">
     <div class="row">
       <div class="col-3"></div>
@@ -53,30 +55,37 @@
         <div class="mb-3">
 
           <select [(ngModel)]="vacinaSelecionada" class="form-control" [ngModelOptions]="{standalone: true}">
-                            
-                            <option selected [ngValue]="null">Selecione a vacina</option>						
-                            <option *ngFor="let v of listaVacinasDrop" [ngValue]="v">{{v.nome}}</option>
-                            </select>
+
+            <option selected [ngValue]="null">Selecione a vacina</option>
+            <option *ngFor="let v of listaVacinasDrop" [ngValue]="v">{{v.nome}}</option>
+          </select>
         </div>
         <div class="mb-3">
           <label style="float: left;">Data de vacinação: </label>
 
-          <input type="date" class="form-control" [(ngModel)]="vacinaCadastro.Data" placeholder="Data vacina">
+          <input type="date" class="form-control" name="currentDate" [ngModel]="vacinaCadastro.data | date:'yyyy-MM-dd'"
+            [(ngModel)]="vacinaCadastro.data" placeholder="Data vacina">
         </div>
         <div class=" mb-3">
           <label style="float: left;">Lote: </label>
-          <input type="text" class="form-control" [(ngModel)]="vacinaCadastro.Lote" placeholder="Lote vacina">
+          <input type="text" class="form-control" [(ngModel)]="vacinaCadastro.lote" placeholder="Lote vacina">
         </div>
         <div class=" mb-3">
           <label style="float: left;">Dose: </label>
-          <input type="text" class="form-control" [(ngModel)]="vacinaCadastro.Dose" placeholder="Dose vacina">
+          <input type="text" class="form-control" [(ngModel)]="vacinaCadastro.dose" placeholder="Dose vacina">
           <small>Caso seja dose única informe 0.</small>
         </div>
 
         <div class="row">
 
-          <div class="col-12 mb-3">
+          <div class="col-12 mb-3" *ngIf="!isEditando">
             <button class="btn btn-primary" style="float:right" (click)=" cadastrar()"> Salvar </button>
+          </div>
+          <div class="col-12 mb-3" *ngIf="isEditando" style="text-align: right;">
+            <button class="btn btn-primary" (click)=" salvar()"> Salvar </button>
+            &nbsp;
+            <button class="btn btn-danger" (click)=" cancelar()"> Cancelar </button>
+
           </div>
         </div>
 
@@ -84,9 +93,9 @@
       <div class="col-3"></div>
     </div>
   </div>
-  <br/>
+  <br />
 
-  <div class="row" *ngIf="listaVacinasPaciente.length > 0 && isCadastrando">
+  <div class="row" *ngIf="listaVacinasPaciente.length > 0 && isCadastrando && !isEditando">
     <div class="col-3"></div>
     <div class="form-control col-6" style="height:auto !important;">
       <ul>
@@ -94,15 +103,15 @@
           <div class="row">
             <div class="col-8">
               <label>Nome: {{dp.nome}} </label>
-              <br/>
+              <br />
               <label>Lote: {{dp.lote}} </label>
-              <br/>
+              <br />
               <label>Data: {{dp.data}} </label>
-              <br/>
+              <br />
               <label>Dose: {{dp.dose}} </label>
             </div>
             <div class="col-4" style="text-align:end;">
-              <button class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i></button>
+              <button class="btn btn-primary" title="Editar" (click)="editarVacina(dp)"><i class="fa fa-pencil"></i></button>
               &nbsp;
               <button class="btn btn-danger" title="Remover" (click)=" deletarVacina(dp._id)"><i class="fa fa-trash"></i></button>
             </div>
@@ -135,15 +144,19 @@
 
         <div class="row">
           <div class="column col-3" style="background-color:#aaa;">
-            <h5 *ngIf="AntimeningococicaCConjugada.EmAtraso == false"><strong>Nome:</strong> {{AntimeningococicaCConjugada.Nome}} </h5>
-            <h5 *ngIf="AntimeningococicaCConjugada.EmAtraso == true" style="color:red;"><strong>Nome:</strong> Antimeningocócica C conjugada </h5>
+            <h5 *ngIf="AntimeningococicaCConjugada.EmAtraso == false"><strong>Nome:</strong>
+              {{AntimeningococicaCConjugada.Nome}} </h5>
+            <h5 *ngIf="AntimeningococicaCConjugada.EmAtraso == true" style="color:red;"><strong>Nome:</strong>
+              Antimeningocócica C conjugada </h5>
             <h5><strong>Lote:</strong> {{AntimeningococicaCConjugada.Lote}}</h5>
             <h5><strong>Dose:</strong> {{AntimeningococicaCConjugada.Dose}}</h5>
             <h5><strong>Data:</strong> {{AntimeningococicaCConjugada.Data}}</h5>
           </div>
           <div class="column col-3" style="background-color:#bbb;">
-            <h5 *ngIf="Antipneumococica10ValenteConjugada.EmAtraso == false"><strong>Nome:</strong> {{Antipneumococica10ValenteConjugada.Nome}} </h5>
-            <h5 *ngIf="Antipneumococica10ValenteConjugada.EmAtraso == true" style="color:red;"><strong>Nome:</strong> Antipneumocócica 10 valente conjugada</h5>
+            <h5 *ngIf="Antipneumococica10ValenteConjugada.EmAtraso == false"><strong>Nome:</strong>
+              {{Antipneumococica10ValenteConjugada.Nome}} </h5>
+            <h5 *ngIf="Antipneumococica10ValenteConjugada.EmAtraso == true" style="color:red;"><strong>Nome:</strong>
+              Antipneumocócica 10 valente conjugada</h5>
             <h5><strong>Lote:</strong> {{Antipneumococica10ValenteConjugada.Lote}}</h5>
             <h5><strong>Dose:</strong> {{Antipneumococica10ValenteConjugada.Dose}}</h5>
             <h5><strong>Data:</strong> {{Antipneumococica10ValenteConjugada.Data}}</h5>
@@ -166,7 +179,7 @@
           </div>
 
         </div>
-        <br/>
+        <br />
         <div class="row">
           <div class="column col-3" style="background-color:#aaa;">
             <h5 *ngIf="FebreAmarela.EmAtraso == false"><strong>Nome:</strong> {{FebreAmarela.Nome}} </h5>
@@ -194,7 +207,8 @@
           </div>
           <div class="column col-3" style="background-color:#bbb;">
             <h5 *ngIf="Tetravalente.EmAtraso == false"><strong>Nome:</strong> {{Tetravalente.Nome}} </h5>
-            <h5 *ngIf="Tetravalente.EmAtraso == true" style="color:red;"><strong>Nome:</strong> Tetravalente (DTP + Hib) </h5>
+            <h5 *ngIf="Tetravalente.EmAtraso == true" style="color:red;"><strong>Nome:</strong> Tetravalente (DTP +
+              Hib) </h5>
             <h5><strong>Lote:</strong> {{Tetravalente.Lote}}</h5>
             <h5><strong>Dose:</strong> {{Tetravalente.Dose}}</h5>
             <h5><strong>Data:</strong> {{Tetravalente.Data}}</h5>
@@ -202,12 +216,13 @@
           </div>
 
         </div>
-        <br/>
+        <br />
 
         <div class="row">
           <div class="column col-3" style="background-color:#aaa;">
             <h5 *ngIf="VOP.EmAtraso == false"><strong>Nome:</strong> {{VOP.Nome}} </h5>
-            <h5 *ngIf="VOP.EmAtraso == true" style="color:red;"><strong>Nome:</strong> VOP(vacina oral contra a poliomelite - Sabin) </h5>
+            <h5 *ngIf="VOP.EmAtraso == true" style="color:red;"><strong>Nome:</strong> VOP(vacina oral contra a
+              poliomelite - Sabin) </h5>
             <h5><strong>Lote:</strong> {{VOP.Lote}}</h5>
             <h5><strong>Dose:</strong> {{VOP.Dose}}</h5>
             <h5><strong>Data:</strong> {{VOP.Data}}</h5>
@@ -215,7 +230,8 @@
           </div>
           <div class="column col-3" style="background-color:#bbb;">
             <h5 *ngIf="VORH.EmAtraso == false"><strong>Nome:</strong> {{VORH.Nome}} </h5>
-            <h5 *ngIf="VORH.EmAtraso == true" style="color:red;"><strong>Nome:</strong> VORH (vacina oral contra rotavírus humano) </h5>
+            <h5 *ngIf="VORH.EmAtraso == true" style="color:red;"><strong>Nome:</strong> VORH (vacina oral contra
+              rotavírus humano) </h5>
             <h5><strong>Lote:</strong> {{VORH.Lote}}</h5>
             <h5><strong>Dose:</strong> {{VORH.Dose}}</h5>
             <h5><strong>Data:</strong> {{VORH.Data}}</h5>
@@ -228,6 +244,6 @@
       </div>
     </div>
   </div>
-  <br/>
+  <br />
 
 </div>

@@ -12,7 +12,7 @@ export class FormsComponent {
   listaNoticias: any[];
   listaImagens: ImagemViewModel[];
   imagemSelecionada: ImagemViewModel;
-
+  isEditando: boolean = false;
   constructor(private noticiaService: NoticiaService) {
     this.noticia = new NoticiaViewModel();
     this.listaNoticias = [];
@@ -80,6 +80,33 @@ export class FormsComponent {
     this.noticiaService.deleteNoticia(id);
     alert("Removido com sucesso.")
     this.consultarNoticias();
+  }
+  editarNoticia(n: NoticiaViewModel){
+    this.isEditando = true;
+    this.noticia = n;
+    this.listaImagens.forEach(img =>{
+      if(img.src == n.imagem)
+        this.imagemSelecionada = img;
+    });
+  }
+  salvar(){
+    if (this.validaCadastro()) {
+      this.noticia.imagem = this.imagemSelecionada.src;
+      var result = this.noticiaService.updateNoticia(this.noticia);
+      alert("Dados alterados!");
+      this.imagemSelecionada = null;
+      this.isEditando = false;
+      this.noticia = new NoticiaViewModel();
+      this.consultarNoticias();
+    } else {
+      alert("Campos para o cadastro não preenchidos.")
+    }
+  }
+  cancelar(){
+    
+    this.imagemSelecionada = null;
+    this.isEditando = false;
+    this.noticia = new NoticiaViewModel();
   }
 
 }

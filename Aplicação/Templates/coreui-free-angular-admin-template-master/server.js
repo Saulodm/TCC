@@ -182,7 +182,7 @@ app.post("/Usuario/Register", function (req, res) {
     numero: body.endereco.numero,
     bairro: body.endereco.bairro,
     complemento: body.endereco.complemento,
-  
+
   });
   endereco.save(function (err, documentEnd) {
     if (err)
@@ -296,6 +296,19 @@ app.post("/Dependente/Register", function (req, res) {
   });
 })
 
+app.post("/Dependente/Edit", function (req, res) {
+  var Dependente = mongoose.model("Dependente", dependenteSchema);
+  var body = req.body;
+  Dependente.findOneAndUpdate({ _id: body._id }, body, function (err, document) {
+    if (err)
+      console.log(err);
+    console.log("saved");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(document);
+  });
+})
+
+
 app.get("/Dependente/Consulta/:idusuario", function (req, res) {
   var Dependente = mongoose.model("Dependente", dependenteSchema);
 
@@ -339,7 +352,17 @@ app.delete("/Vacinas/:id", function (req, res) {
     res.end(JSON.stringify(result));
   })
 })
-
+app.post("/Vacinas/Edit", function (req, res) {
+  var VacinaCartao = mongoose.model("VacinaCartao", vacinaCartaoSchema);
+  var body = req.body;
+  VacinaCartao.findOneAndUpdate({ _id: body._id }, body, function (err, document) {
+    if (err)
+      console.log(err);
+    console.log("saved");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(document);
+  });
+})
 app.post("/Medico/Register", function (req, res) {
   var User = mongoose.model("Usuario", usuarioSchema);
   var Medico = mongoose.model("Medico", medicoSchema);
@@ -392,6 +415,21 @@ app.post("/Noticia/Register", function (req, res) {
     imagem: body.imagem
   });
   noticia.save(function (err, document) {
+    if (err)
+      console.log(err);
+    console.log("saved");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(document);
+  });
+
+})
+app.post("/Noticia/Edit", function (req, res) {
+  var Noticia = mongoose.model("Noticia", noticiaSchema);
+
+  var body = req.body;
+  console.log(body);
+
+  Noticia.findOneAndUpdate({ _id: body._id }, body, function (err, document) {
     if (err)
       console.log(err);
     console.log("saved");
@@ -469,7 +507,7 @@ app.post("/Acesso/Update", function (req, res) {
 
   var body = req.body;
   console.log(body);
-  
+
   Acesso.findOneAndUpdate({ _id: body._id }, body, function (err, document) {
     if (err)
       console.log(err);

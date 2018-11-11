@@ -37,8 +37,14 @@
 
       <div class="row">
 
-        <div class="col-12 mb-3">
+        <div class="col-12 mb-3" *ngIf="!isEditando">
           <button class="btn btn-primary" style="float:right" (click)=" cadastrar()"> Cadastrar </button>
+        </div>
+        <div class="col-12 mb-3" *ngIf="isEditando" style="text-align: right;">
+          <button class="btn btn-primary" (click)=" salvar()"> Salvar </button>
+          &nbsp;
+          <button class="btn btn-danger" (click)=" cancelar()"> Cancelar </button>
+
         </div>
       </div>
 
@@ -61,7 +67,7 @@
     <div class="col-3"></div>
   </div>
 
-  <div class="row" *ngIf="listaNoticias.length > 0">
+  <div class="row" *ngIf="listaNoticias.length > 0 && !isEditando">
     <div class="col-3"></div>
     <div class="form-control col-6" style="height:auto !important;">
       <ul>
@@ -73,6 +79,8 @@
               <label>Manchete: {{dp.manchete}} </label>
             </div>
             <div class="col-6" style="text-align:end;">
+              <button class="btn btn-primary" title="Editar" (click)=" editarNoticia(dp)"> <i class="fa fa-pencil"></i></button>
+              &nbsp;
               <button class="btn btn-danger" title="Remover" (click)=" deletarNoticia(dp._id)"> <i class="fa fa-trash"></i></button>
             </div>
           </div>

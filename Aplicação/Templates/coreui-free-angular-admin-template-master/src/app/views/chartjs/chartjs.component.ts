@@ -18,7 +18,7 @@ export class ChartJSComponent {
   public dependenteSelecionado: any;
   public pesquisaEuMesmo: boolean = true;
   public vacinaSelecionada: any;
-
+  isEditando: boolean = false;
   listaVacinas: any[];
   listaVacinasDrop: any[];
   listaVacinasPaciente: any[];
@@ -37,7 +37,7 @@ export class ChartJSComponent {
   public VOP: VacinaViewModel = new VacinaViewModel();
   public VORH: VacinaViewModel = new VacinaViewModel();
 
-  constructor( @Inject(SESSION_STORAGE)
+  constructor(@Inject(SESSION_STORAGE)
   public storage: StorageService,
     private vacinaService: VacinaService,
     private usuarioService: UsuarioService,
@@ -65,8 +65,8 @@ export class ChartJSComponent {
   cadastrar() {
     if (this.validaCadastro()) {
       this.isCadastrando = false;
-      this.vacinaCadastro.Nome = this.vacinaSelecionada.nome;
-      this.vacinaCadastro.Cod = this.vacinaSelecionada.cod;
+      this.vacinaCadastro.nome = this.vacinaSelecionada.nome;
+      this.vacinaCadastro.cod = this.vacinaSelecionada.cod;
       if (this.pesquisaEuMesmo) {
         this.vacinaService.postVacinaCartao(this.vacinaCadastro, this.storage.get(StorageKeys.userId));
       } else {
@@ -99,7 +99,7 @@ export class ChartJSComponent {
         vc.lote = vc.lote.toUpperCase();
         vc.data = Util.FormataData(vc.data);
         this.listaVacinasPaciente.push(vc);
-      });     
+      });
     }
     if (this.listaVacinasPaciente.length > 0) {
       this.listaVacinas.forEach(vc => {
@@ -308,17 +308,17 @@ export class ChartJSComponent {
       return false;
 
     }
-    if (this.vacinaCadastro.Data == undefined || this.vacinaCadastro.Data == "") {
+    if (this.vacinaCadastro.data == undefined || this.vacinaCadastro.data == "") {
       alert("Informe a data de vacinação.");
       return false;
 
     }
-    if (this.vacinaCadastro.Lote == undefined || this.vacinaCadastro.Lote == "") {
+    if (this.vacinaCadastro.lote == undefined || this.vacinaCadastro.lote == "") {
       alert("Informe o lote da vacina.");
       return false;
 
     }
-    if (this.vacinaCadastro.Dose == undefined || this.vacinaCadastro.Lote == "") {
+    if (this.vacinaCadastro.dose == undefined || this.vacinaCadastro.dose == "") {
       alert("Informe a dose da vacina.");
       return false;
 
@@ -350,5 +350,35 @@ export class ChartJSComponent {
     } else {
       return false;
     }
+  }
+
+  editarVacina(v: any) {
+    this.isEditando = true;
+    this.vacinaCadastro = v;
+    this.vacinaCadastro.lote = v.lote;
+    this.vacinaCadastro.dose = v.dose;
+    this.vacinaCadastro.data = Util.DesformataData(v.data);
+
+    this.listaVacinasDrop.forEach(vc => {
+      if (vc.cod == v.cod)
+        this.vacinaSelecionada = vc;
+    })
+  }
+  salvar(){
+    if (this.validaCadastro()) {
+      this.isEditando = false;
+      this.vacinaCadastro.nome = this.vacinaSelecionada.nome;
+      this.vacinaCadastro.cod = this.vacinaSelecionada.cod;
+      this.vacinaService.updateVacinaCartao(this.vacinaCadastro);
+      this.vacinaCadastro = new VacinaCartaoViewModel();
+      this.vacinaSelecionada = null;
+      this.consultar();
+    }
+  }
+  cancelar(){
+    this.isEditando = false;    
+    this.vacinaCadastro = new VacinaCartaoViewModel();
+    this.vacinaSelecionada = null;
+    this.consultar();
   }
 }

@@ -25,11 +25,11 @@ export class VacinaService {
 
     var object = {
       idpaciente: idPaciente,
-      cod: vacina.Cod,
-      nome: vacina.Nome,
-      data: vacina.Data,
-      lote: vacina.Lote,
-      dose: vacina.Dose
+      cod: vacina.cod,
+      nome: vacina.nome,
+      data: vacina.data,
+      lote: vacina.lote,
+      dose: vacina.dose
     }
     var vacinaCartao = JSON.stringify(object);
     this.baseService.httpPost("Vacinas/Register", vacinaCartao, res => {
@@ -51,6 +51,14 @@ export class VacinaService {
     this.baseService.httpDelete("Vacinas/" + id, res => {
       result = JSON.parse(res);
     })
+    return result;
+  }
+  updateVacinaCartao(vacina: VacinaCartaoViewModel){
+    var param = JSON.stringify(vacina);
+    var result = {};
+    this.baseService.httpPost("Vacinas/Edit", param, (res => {
+      result = JSON.parse(res);
+    }));
     return result;
   }
 

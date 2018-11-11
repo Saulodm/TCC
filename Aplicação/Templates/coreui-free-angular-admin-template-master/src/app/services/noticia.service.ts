@@ -33,5 +33,13 @@ export class NoticiaService {
     return result;
 
   }
+  updateNoticia(noticia: NoticiaViewModel): any{
+    var user = JSON.stringify(noticia);
+    var result = null
+    this.baseService.httpPost("Noticia/Edit", user, res => {
+      result = JSON.parse(res);
+    })
+    return result;
+  }
 
 }

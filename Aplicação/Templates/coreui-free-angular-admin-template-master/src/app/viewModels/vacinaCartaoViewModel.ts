@@ -1,7 +1,7 @@
 export class VacinaCartaoViewModel{
-    public Nome: string;
-    public Lote: string;
-    public Data: string;  
-    public Dose: string;
-    public Cod: Number;
+    public nome: string;
+    public lote: string;
+    public data: string;  
+    public dose: string;
+    public cod: number;
 }

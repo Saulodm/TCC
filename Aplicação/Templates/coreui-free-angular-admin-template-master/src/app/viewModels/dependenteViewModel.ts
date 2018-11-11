@@ -1,5 +1,5 @@
 export class DependenteViewModel {
     public nome: string;   
-    public dataNacimento: string;
+    public datanascimento: string;
     public cpf: string;
 }

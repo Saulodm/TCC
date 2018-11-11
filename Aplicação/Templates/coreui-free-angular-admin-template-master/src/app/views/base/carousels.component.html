@@ -1,5 +1,5 @@
 <div class="animated fadeIn">
-  <br/>
+  <br />
   <div class="row">
     <div class="col-3"></div>
     <div class="form-control col-6" style="height:auto !important;">
@@ -10,7 +10,8 @@
       <div class="mb-3">
         <label style="float: left;">Data de Nascimento: </label>
 
-        <input type="date" class="form-control" [(ngModel)]="dependente.dataNacimento" placeholder="Data de nascimento">
+        <input type="date" name="currentDate" [ngModel]="dependente.datanascimento | date:'yyyy-MM-dd'" class="form-control"
+          [(ngModel)]="dependente.datanascimento">
       </div>
 
       <div class=" mb-3">
@@ -21,15 +22,21 @@
 
       <div class="row">
 
-        <div class="col-12 mb-3">
-          <button class="btn btn-primary" style="float:right" (click)=" cadastrar()"> Salvar </button>
+        <div class="col-12 mb-3" *ngIf="!isEditando">
+          <button class="btn btn-primary" style="float:right" (click)=" cadastrar()"> Cadastrar </button>
+        </div>
+        <div class="col-12 mb-3" *ngIf="isEditando" style="text-align: right;">
+          <button class="btn btn-primary" (click)=" salvar()"> Salvar </button>
+          &nbsp;
+          <button class="btn btn-danger" (click)=" cancelar()"> Cancelar </button>
+
         </div>
       </div>
 
     </div>
     <div class="col-3"></div>
   </div>
-  <br/>
+  <br />
   <div class="row" *ngIf="listaDepedentes.length == 0">
     <div class="col-3"></div>
 
@@ -45,7 +52,7 @@
     <div class="col-3"></div>
   </div>
 
-  <div class="row" *ngIf="listaDepedentes.length > 0">
+  <div class="row" *ngIf="listaDepedentes.length > 0 && !isEditando">
     <div class="col-3"></div>
     <div class="form-control col-6" style="height:auto !important;">
       <ul>
@@ -53,13 +60,15 @@
           <div class="row">
             <div class=" col-6">
               <label>Nome: {{dp.nome}} </label>
-              <br/>
+              <br />
               <label>CPF: {{dp.cpf}} </label>
-              <br/>
+              <br />
               <label>Data de Nascimento: {{dp.datanascimento}} </label>
             </div>
             <div class="col-6" style="text-align:end;">
-              <button class="btn btn-danger" title="Remover" (click)=" deletarDependente(dp._id)"> <i class="fa fa-trash" ></i></button>
+              <button class="btn btn-primary" title="Remover" (click)=" editarDependente(dp)"> <i class="fa fa-pencil"></i></button>
+              &nbsp;
+              <button class="btn btn-danger" title="Remover" (click)=" deletarDependente(dp._id)"> <i class="fa fa-trash"></i></button>
             </div>
           </div>
 

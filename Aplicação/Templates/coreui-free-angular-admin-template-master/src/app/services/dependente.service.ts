@@ -13,7 +13,7 @@ export class DependenteService {
     let object = {
       idusuario: idUsuario,
       nome: dependente.nome,
-      datanascimento: dependente.dataNacimento,
+      datanascimento: dependente.datanascimento,
       cpf: dependente.cpf
     }
     var param = JSON.stringify(object);
@@ -37,6 +37,15 @@ export class DependenteService {
     this.baseService.httpDelete("Dependente/" + id, res => {
       result = JSON.parse(res);
     })
+    return result;
+  }
+  updateDependente( dependente: DependenteViewModel) {
+   
+    var param = JSON.stringify(dependente);
+    var result = {};
+    this.baseService.httpPost("Dependente/Edit", param, (res => {
+      result = JSON.parse(res);
+    }));
     return result;
   }
 }
