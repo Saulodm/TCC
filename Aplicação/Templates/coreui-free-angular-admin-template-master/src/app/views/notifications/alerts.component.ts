@@ -305,6 +305,7 @@ export class AlertsComponent {
   }
   getDependentes() {
     this.listaDependentes = this.dependenteService.getDependentes(this.pacienteSelecionado.idpaciente) as Array<any>;
+    this.dependenteSelecionado = null;
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="animated fadeIn">
-  <br/>
+  <br />
   <div class="row">
     <div class="col-3"></div>
     <div class="form-control col-6" style="height:auto !important;">
@@ -7,6 +7,7 @@
         <label style="float: left;">Titulo: </label>
         <input type="text" class="form-control" [(ngModel)]="noticia.titulo" placeholder="Título">
       </div>
+
       <div class="mb-3">
         <label style="float: left;">Manchete: </label>
 
@@ -17,6 +18,15 @@
         <label style="float: left;">Texto: </label>
         <textarea class="form-control rounded-0" [(ngModel)]="noticia.texto" rows="10"></textarea>
 
+
+      </div>
+      <div class="mb-3">
+        <label style="float:left;">Imagem:</label>
+        <select [(ngModel)]="imagemSelecionada" class="form-control" [ngModelOptions]="{standalone: true}">
+
+          <option selected [ngValue]="null">Selecione a imagem</option>
+          <option *ngFor="let i of listaImagens" [ngValue]="i">{{i.nome}}</option>
+        </select>
 
       </div>
       <!-- <div class=" mb-3">
@@ -35,7 +45,7 @@
     </div>
     <div class="col-3"></div>
   </div>
-  <br/>
+  <br />
   <div class="row" *ngIf="listaNoticias.length == 0">
     <div class="col-3"></div>
 
@@ -59,11 +69,11 @@
           <div class="row">
             <div class=" col-6">
               <label>Titulo: {{dp.titulo}} </label>
-              <br/>
+              <br />
               <label>Manchete: {{dp.manchete}} </label>
             </div>
             <div class="col-6" style="text-align:end;">
-              <button class="btn btn-danger" title="Remover" (click)=" deletarNoticia(dp._id)"> <i class="fa fa-trash" ></i></button>
+              <button class="btn btn-danger" title="Remover" (click)=" deletarNoticia(dp._id)"> <i class="fa fa-trash"></i></button>
             </div>
           </div>
 
@@ -72,5 +82,5 @@
     </div>
     <div class="col-3"></div>
   </div>
-  <br/>
+  <br />
 </div>

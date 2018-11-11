@@ -3,9 +3,11 @@
     <div *ngIf="visibleNoticia1" class="card col-md-6 mt-5 mr-0">
       <div class="card-body">
         <h1>{{noticia1.titulo}}</h1>
-        <br/>
+        <br />
+        <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" [src]="getUrlImage(noticia1.imagem)">
+        <br />
         <h4>{{noticia1.manchete}}</h4>
-        <br/>
+        <br />
         <span>
           {{noticia1.texto}}
         </span>
@@ -14,11 +16,13 @@
     <div *ngIf="visibleNoticia2" class="card col-md-6 mt-5">
       <div class="card-body">
         <h1>{{noticia2.titulo}}</h1>
-        <br/>
+        <br />
+        <img style="display: block; margin-left: auto; margin-right: auto; width:50%;" [src]="getUrlImage(noticia2.imagem)">
+        <br />
         <h4>{{noticia2.manchete}}</h4>
-        <br/>
+        <br />
         <span>
-            {{noticia2.texto}}
+          {{noticia2.texto}}
         </span>
       </div>
     </div>
@@ -27,20 +31,24 @@
     <div *ngIf="visibleNoticia3" class="card col-md-6 mt-3 mr-0">
       <div class="card-body">
         <h1>{{noticia3.titulo}}</h1>
-        <br/>
+        <br />
+        <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" [src]="getUrlImage(noticia3.imagem)">
+        <br />
         <h4>{{noticia3.manchete}}</h4>
-        <br/>
+        <br />
         <span>
-              {{noticia3.texto}}
+          {{noticia3.texto}}
         </span>
       </div>
     </div>
     <div *ngIf="visibleNoticia4" class="card col-md-6 mt-3">
       <div class="card-body">
         <h1>{{noticia4.titulo}}</h1>
-        <br/>
+        <br />
+        <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" [src]="getUrlImage(noticia4.imagem)">
+        <br />
         <h4>{{noticia4.manchete}}</h4>
-        <br/>
+        <br />
         <span>
           {{noticia4.texto}}
         </span>
@@ -52,9 +60,11 @@
     <div *ngIf="visibleNoticia5" class="card col-md-6 mt-3 mr-0">
       <div class="card-body">
         <h1>{{noticia5.titulo}}</h1>
-        <br/>
+        <br />
+        <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" [src]="getUrlImage(noticia5.imagem)">
+        <br />
         <h4>{{noticia5.manchete}}</h4>
-        <br/>
+        <br />
         <span>
           {{noticia5.texto}}
         </span>
@@ -63,9 +73,11 @@
     <div *ngIf="visibleNoticia6" class="card col-md-6 mt-3 ">
       <div class="card-body">
         <h1>{{noticia6.titulo}}</h1>
-        <br/>
+        <br />
+        <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" [src]="getUrlImage(noticia6.imagem)">
+        <br />
         <h4>{{noticia6.manchete}}</h4>
-        <br/>
+        <br />
         <span>
           {{noticia6.texto}}
         </span>

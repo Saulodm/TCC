@@ -55,7 +55,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
    
   }
-
+  getUrlImage(src:string ):any{
+    return encodeURI(src);
+  }
   consutarNoticias() {
     this.listaNoticias = []
     var result = this.noticiaService.getNoticias();
@@ -68,36 +70,42 @@ export class DashboardComponent implements OnInit {
           this.noticia1.manchete = element.manchete;
           this.noticia1.texto = element.texto;
           this.noticia1.titulo = element.titulo;
+          this.noticia1.imagem = element.imagem;
           this.visibleNoticia1 = true;
           break;
         case 1:
           this.noticia2.manchete = element.manchete;
           this.noticia2.texto = element.texto;
           this.noticia2.titulo = element.titulo;
+          this.noticia2.imagem = element.imagem;
           this.visibleNoticia2 = true;
           break;
         case 2:
           this.noticia3.manchete = element.manchete;
           this.noticia3.texto = element.texto;
           this.noticia3.titulo = element.titulo;
+          this.noticia3.imagem = element.imagem;
           this.visibleNoticia3 = true;
           break;
         case 3:
           this.noticia4.manchete = element.manchete;
           this.noticia4.texto = element.texto;
           this.noticia4.titulo = element.titulo;
+          this.noticia4.imagem = element.imagem;
           this.visibleNoticia4 = true;
           break;
         case 4:
           this.noticia5.manchete = element.manchete;
           this.noticia5.texto = element.texto;
           this.noticia5.titulo = element.titulo;
+          this.noticia5.imagem = element.imagem;
           this.visibleNoticia5 = true;
           break;
         case 5:
           this.noticia6.manchete = element.manchete;
           this.noticia6.texto = element.texto;
           this.noticia6.titulo = element.titulo;
+          this.noticia6.imagem = element.imagem;
           this.visibleNoticia6 = true;
           break;
 
