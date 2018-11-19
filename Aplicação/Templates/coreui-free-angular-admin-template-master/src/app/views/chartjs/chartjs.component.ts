@@ -80,6 +80,8 @@ export class ChartJSComponent {
   }
 
   consultar() {
+    this.vacinaCadastro = new VacinaCartaoViewModel();
+    this.isCadastrando = false;
     this.listaVacinasPaciente = [];
     this.limparVacinas();
     if (this.pesquisaEuMesmo) {

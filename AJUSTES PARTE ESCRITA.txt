@@ -1,5 +1,12 @@
-Melhorar a introdução fazendo o link com o problema e os objetivos.
-
-mudar a metodologia colocando os métodos envolvidos no projeto
-
-colocar alguns detalhes técnicos na implementação
+--Referencia JavaScript
+--Referencia Arquitetura de Software
+--Referencia Mean Stack
+--Referencia ExpressJS
+--Palavras em inglês devem estar em itálico
+--Node síncrono ou assincrono?
+--Melhorar explicação da figura 4
+Requisitos não funcionais
+--Alterar figuras (casos de usos)
+--Mudar formato dos requisitos
+--Melhorar a descrição dos casos de uso colocando os atores
+Analisar diagramas de processos
