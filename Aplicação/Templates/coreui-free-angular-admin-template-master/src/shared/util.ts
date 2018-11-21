@@ -167,7 +167,14 @@ export class Util {
 
     public static FormataData(data: string) {
         var array = data.split('-');
-        return array[2] + "/" + array[1] + "/" + array[0]
+        if (array.length == 1) {
+            array = data.split('/');
+            return array[1] + "/" + array[0] + "/" + array[2]
+
+        }
+        else {
+            return array[2] + "/" + array[1] + "/" + array[0]
+        }
     }
     public static DesformataData(data: string) {
         var array = data.split('/');
